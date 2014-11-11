@@ -393,6 +393,7 @@
 				39F306511A11B0D500CEAE43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		39F306521A11B0D500CEAE43 /* Build configuration list for PBXNativeTarget "catchmybusTests" */ = {
 			isa = XCConfigurationList;
@@ -401,6 +402,7 @@
 				39F306541A11B0D500CEAE43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
