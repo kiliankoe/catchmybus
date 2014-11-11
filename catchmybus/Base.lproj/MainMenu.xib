@@ -13,7 +13,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="catchmybus" customModuleProvider="target">
             <connections>
+                <outlet property="nextBusLabel" destination="g4q-Ns-qGi" id="F8h-Lw-caK"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
+                <outlet property="stopLabel" destination="FBu-K8-M3m" id="ZdX-yH-aCb"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -668,14 +670,31 @@
         </menu>
         <menu id="KpV-aS-2O2">
             <items>
-                <menuItem title="5 Minuten" id="g4q-Ns-qGi">
+                <menuItem title="Nächster Bus: 5 Minuten" id="g4q-Ns-qGi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="aoX-W3-qdq"/>
+                <menuItem title="Löbtau: 5 Minuten" id="QX9-FV-uQW">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Striesen: 8 Minuten" id="qif-x3-tFV">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
-                <menuItem title="Refresh" id="wVY-tI-kkW">
+                <menuItem title="Haltestelle: Helmholtzstraße" id="FBu-K8-M3m">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="g56-u2-k8W"/>
+                <menuItem title="Manual refresh" id="wVY-tI-kkW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="refreshClicked:" target="Voe-Tx-rLC" id="rFq-Qs-KS5"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Settings..." id="iIr-9O-ekF">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="settingsButtonPressed:" target="Voe-Tx-rLC" id="9Tx-02-8ot"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit" id="xM6-rW-caG">

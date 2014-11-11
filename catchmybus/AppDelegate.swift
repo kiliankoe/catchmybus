@@ -14,6 +14,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet weak var window: NSWindow!
 	@IBOutlet weak var statusMenu: NSMenu!
 
+	@IBOutlet weak var nextBusLabel: NSMenuItem!
+
+	@IBOutlet weak var stopLabel: NSMenuItem!
+
+
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -26,6 +31,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func refreshClicked(sender: NSMenuItem) {
+	}
+
+	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
 	}
 
 	@IBAction func quitButtonPressed(sender: NSMenuItem) {
