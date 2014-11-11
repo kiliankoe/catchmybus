@@ -13,7 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="catchmybus" customModuleProvider="target">
             <connections>
-                <outlet property="nextBusLabel" destination="g4q-Ns-qGi" id="F8h-Lw-caK"/>
+                <outlet property="firstBusLabel" destination="QX9-FV-uQW" id="7fe-GJ-UW6"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
                 <outlet property="stopLabel" destination="FBu-K8-M3m" id="ZdX-yH-aCb"/>
             </connections>
@@ -670,10 +670,6 @@
         </menu>
         <menu id="KpV-aS-2O2">
             <items>
-                <menuItem title="Nächster Bus: 5 Minuten" id="g4q-Ns-qGi">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="aoX-W3-qdq"/>
                 <menuItem title="Löbtau: 5 Minuten" id="QX9-FV-uQW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
@@ -681,7 +677,10 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
-                <menuItem title="Haltestelle: Helmholtzstraße" id="FBu-K8-M3m">
+                <menuItem title="Helmholtzstraße" state="on" id="FBu-K8-M3m">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Zellescher Weg" id="Dmm-OD-mf1">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="g56-u2-k8W"/>

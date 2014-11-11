@@ -8,16 +8,17 @@
 
 import Cocoa
 
+import Alamofire
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-	@IBOutlet weak var window: NSWindow!
 	@IBOutlet weak var statusMenu: NSMenu!
 
-	@IBOutlet weak var nextBusLabel: NSMenuItem!
-
+	@IBOutlet weak var firstBusLabel: NSMenuItem!
 	@IBOutlet weak var stopLabel: NSMenuItem!
 
+	var selectedStop = "Helmholtzstrasse"
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -27,10 +28,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 		statusItem.image = icon
 		statusItem.menu = statusMenu
-		statusItem.title = "5   " // Yeah, because extra spaces isn't shitty...
+
+		// fake a refresh when starting
+		refreshClicked(stopLabel)
 	}
 
 	@IBAction func refreshClicked(sender: NSMenuItem) {
+		let requestURL = "http://simpledvb.herokuapp.com/api/monitor/\(selectedStop)"
+		Alamofire.request(.GET, requestURL)
+			.responseJSON { (_, _, JSON, _) in
+				var resultsArray : [Dictionary<String, AnyObject>] = JSON as [Dictionary]
+
+				let firstResult = resultsArray[0]
+				if let firstBusMinutes : NSNumber = firstResult["arrivaltime"] as? NSNumber {
+					if let firstBusDirection : String = firstResult["direction"] as? String {
+						// Setting the title twice is done on purpose to clear the necessary space
+						self.statusItem.title = firstBusMinutes.stringValue
+						self.statusItem.title = firstBusMinutes.stringValue
+						self.firstBusLabel.title = "\(firstBusDirection): \(firstBusMinutes.stringValue) Minuten"
+					}
+				}
+			}
 	}
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
