@@ -16,9 +16,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var settingsWindow: NSView!
+	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
 
-	@IBOutlet weak var firstBusLabel: NSMenuItem!
-	@IBOutlet weak var stopLabel: NSMenuItem!
+	@IBOutlet weak var stopLabelHelmholtz: NSMenuItem!
+	@IBOutlet weak var stopLabelZelle: NSMenuItem!
+
+	var stopLabels: [NSMenuItem] = []
 
 	var selectedStop = "Helmholtzstrasse"
 
@@ -30,22 +33,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let icon = NSImage(named: "statusIcon")
 		icon?.setTemplate(true)
 
+		// Initialize stopLabels array (this stuff has got to move away from here eventually...)
+		// and definitely not be hardcoded like this
+		stopLabels.append(stopLabelHelmholtz)
+		stopLabels.append(stopLabelZelle)
+
 		statusItem.image = icon
 		statusItem.menu = statusMenu
 
 		// fake a refresh when starting
-		refreshClicked(stopLabel!)
+		refreshClicked(manualRefreshButtonLabel!)
 
 		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateUI"), userInfo: nil, repeats: true)
 	}
 
 	func updateUI() {
 		// let's fake this for now
-		refreshClicked(stopLabel!)
+		refreshClicked(manualRefreshButtonLabel!)
+	}
+
+	func cleanupURLString(dirty: String) -> String {
+		var string: NSString = dirty
+		string = string.stringByReplacingOccurrencesOfString(" ", withString: "")
+		string = string.stringByReplacingOccurrencesOfString("ä", withString: "ae")
+		string = string.stringByReplacingOccurrencesOfString("ö", withString: "oe")
+		string = string.stringByReplacingOccurrencesOfString("ü", withString: "ue")
+		string = string.stringByReplacingOccurrencesOfString("Ä", withString: "Ae")
+		string = string.stringByReplacingOccurrencesOfString("Ö", withString: "Oe")
+		string = string.stringByReplacingOccurrencesOfString("Ü", withString: "Ue")
+		string = string.stringByReplacingOccurrencesOfString("ß", withString: "ss")
+
+		return string as String
 	}
 
 	@IBAction func refreshClicked(sender: NSMenuItem) {
-		let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(selectedStop)"
+		let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(selectedStop)&lim=5"
 		Alamofire.request(.GET, requestURL)
 			.responseJSON { (_, _, JSON, error) in
 				if (error != nil) {
@@ -93,6 +115,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
+
+	}
+	
+	@IBAction func selectStop(sender: NSMenuItem) {
+		self.selectedStop = cleanupURLString(sender.title)
+		for label in stopLabels {
+			label.state = NSOffState
+		}
+		sender.state = NSOnState
+		updateUI()
 	}
 
 	@IBAction func quitButtonPressed(sender: NSMenuItem) {

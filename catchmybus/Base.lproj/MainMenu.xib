@@ -13,9 +13,11 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="catchmybus" customModuleProvider="target">
             <connections>
+                <outlet property="manualRefreshButtonLabel" destination="wVY-tI-kkW" id="muF-LA-Msm"/>
                 <outlet property="settingsWindow" destination="8X9-PR-7NO" id="c4k-BD-7NG"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
-                <outlet property="stopLabel" destination="FBu-K8-M3m" id="ZdX-yH-aCb"/>
+                <outlet property="stopLabelHelmholtz" destination="FBu-K8-M3m" id="jAy-fi-JfM"/>
+                <outlet property="stopLabelZelle" destination="Dmm-OD-mf1" id="dEP-RL-xUg"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -673,9 +675,15 @@
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
                 <menuItem title="Helmholtzstraße" state="on" id="FBu-K8-M3m">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="selectStop:" target="Voe-Tx-rLC" id="onH-8f-rgB"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Zellescher Weg" id="Dmm-OD-mf1">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="selectStop:" target="Voe-Tx-rLC" id="l5V-W5-vIH"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="g56-u2-k8W"/>
                 <menuItem title="Manual refresh" id="wVY-tI-kkW">
@@ -697,7 +705,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="171" y="467.5"/>
+            <point key="canvasLocation" x="170.5" y="467.5"/>
         </menu>
         <window title="catchmybus settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="yyw-Gl-jrH">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
