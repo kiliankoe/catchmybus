@@ -21,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	var selectedStop = "Helmholtzstrasse"
 
+	var numberOfStopsListed = 0
+
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -42,13 +44,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func refreshClicked(sender: NSMenuItem) {
-		println("Manual refresh button clicked")
+//		println("Manual refresh button clicked")
 		let requestURL = "http://simpledvb.herokuapp.com/api/monitor/\(selectedStop)"
 		Alamofire.request(.GET, requestURL)
 			.responseJSON { (_, _, JSON, _) in
 				let resultsArray : [Dictionary<String, AnyObject>] = JSON as [Dictionary]
-				let firstResult = resultsArray[0] //FIXME: This sometimes throws an array out of bounds errors, why?
 				if (resultsArray.count > 0) {
+					let firstResult = resultsArray[0]
+
+					// clear old entries
+					for i in 0..<self.numberOfStopsListed {
+						self.statusMenu.removeItemAtIndex(0)
+					}
+
+					// save the amount of listed stops so these can be removed at the next refresh
+					self.numberOfStopsListed = resultsArray.count
 
 					// set the next bus' arrivaltime in the statusbar title
 					if let firstBusMinutes : NSNumber = firstResult["arrivaltime"] as? NSNumber {
@@ -56,15 +66,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 							// Setting the title twice is done on purpose to clear the necessary space
 							self.statusItem.title = firstBusMinutes.stringValue
 							self.statusItem.title = firstBusMinutes.stringValue
-//							self.firstBusLabel.title = "\(firstBusDirection): \(firstBusMinutes.stringValue) Minuten"
 						}
 					}
 
 					// fill the menu with the other arriving busses
+					var i = 0
 					for result in resultsArray {
 						if let resultMinutes : NSNumber = result["arrivaltime"] as? NSNumber {
 							if let resultDirection : String = result["direction"] as? String {
-								self.statusMenu.addItemWithTitle("\(resultDirection): \(resultMinutes) Minuten", action: nil, keyEquivalent: "")
+								self.statusMenu.insertItemWithTitle("\(resultDirection): \(resultMinutes) Minuten", action: nil, keyEquivalent: "", atIndex: i)
+								i++
 							}
 						}
 					}
