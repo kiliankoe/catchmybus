@@ -33,14 +33,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		statusItem.menu = statusMenu
 
 		// fake a refresh when starting
-		refreshClicked(stopLabel)
+		refreshClicked(stopLabel!)
 
 		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateUI"), userInfo: nil, repeats: true)
 	}
 
 	func updateUI() {
 		// let's fake this for now
-		refreshClicked(stopLabel)
+		refreshClicked(stopLabel!)
 	}
 
 	@IBAction func refreshClicked(sender: NSMenuItem) {
@@ -49,6 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		Alamofire.request(.GET, requestURL)
 			.responseJSON { (_, _, JSON, _) in
 				let resultsArray : [Dictionary<String, AnyObject>] = JSON as [Dictionary]
+				self.numberOfStopsListed = 0
 				if (resultsArray.count > 0) {
 					let firstResult = resultsArray[0]
 
@@ -56,9 +57,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 					for i in 0..<self.numberOfStopsListed {
 						self.statusMenu.removeItemAtIndex(0)
 					}
-
-					// save the amount of listed stops so these can be removed at the next refresh
-					self.numberOfStopsListed = resultsArray.count
 
 					// set the next bus' arrivaltime in the statusbar title
 					if let firstBusMinutes : NSNumber = firstResult["arrivaltime"] as? NSNumber {
@@ -76,6 +74,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 							if let resultDirection : String = result["direction"] as? String {
 								self.statusMenu.insertItemWithTitle("\(resultDirection): \(resultMinutes) Minuten", action: nil, keyEquivalent: "", atIndex: i)
 								i++
+
+								// save the amount of listed stops so these can be removed at the next refresh
+								self.numberOfStopsListed++
 							}
 						}
 					}
