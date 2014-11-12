@@ -673,9 +673,6 @@
                 <menuItem title="Löbtau: 5 Minuten" id="QX9-FV-uQW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
-                <menuItem title="Striesen: 8 Minuten" id="qif-x3-tFV">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
                 <menuItem title="Helmholtzstraße" state="on" id="FBu-K8-M3m">
                     <modifierMask key="keyEquivalentModifierMask"/>
