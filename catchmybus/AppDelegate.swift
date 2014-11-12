@@ -15,6 +15,7 @@ import Alamofire
 class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBOutlet weak var statusMenu: NSMenu!
+	@IBOutlet weak var settingsWindow: NSView!
 
 	@IBOutlet weak var firstBusLabel: NSMenuItem!
 	@IBOutlet weak var stopLabel: NSMenuItem!
