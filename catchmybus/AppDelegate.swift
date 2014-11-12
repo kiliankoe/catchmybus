@@ -49,7 +49,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		Alamofire.request(.GET, requestURL)
 			.responseJSON { (_, _, JSON, _) in
 				let resultsArray : [Dictionary<String, AnyObject>] = JSON as [Dictionary]
-				self.numberOfStopsListed = 0
 				if (resultsArray.count > 0) {
 					let firstResult = resultsArray[0]
 
@@ -57,6 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 					for i in 0..<self.numberOfStopsListed {
 						self.statusMenu.removeItemAtIndex(0)
 					}
+					self.numberOfStopsListed = 0
 
 					// set the next bus' arrivaltime in the statusbar title
 					if let firstBusMinutes : NSNumber = firstResult["arrivaltime"] as? NSNumber {
@@ -80,7 +80,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 							}
 						}
 					}
-
 				}
 			}
 	}
