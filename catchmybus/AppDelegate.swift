@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let cm = ConnectionManager()
 
-	var numRowsToShow = 5
+	var numRowsToShow = 3
 	var numShownRows = 0
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
@@ -42,14 +42,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		statusItem.image = icon
 		statusItem.menu = statusMenu
 
-		// fake a refresh when starting
-		refreshClicked(manualRefreshButtonLabel!)
+		update()
+
+		// initialize default NSUserDefaults
+		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow": 5]
+		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+
+		// load NSUserDefaults
+		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey("numRowsToShow")
 
 		// initialize timer to automatically call update() every minute
 		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 	}
 
+	func applicationWillTerminate(notification: NSNotification) {
+		NSUserDefaults.standardUserDefaults().setObject(numRowsToShow, forKey: "numRowsToShow")
+	}
+
 	func update() {
+		NSLog("UPDATING")
+
 		// clear connection rows in menu
 		for i in 0..<numShownRows {
 			self.statusMenu.removeItemAtIndex(0)
@@ -74,6 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				self.numShownRows++
 				i++
 			}
+			NSLog("UPDATE FINISHED")
 		})
 	}
 
