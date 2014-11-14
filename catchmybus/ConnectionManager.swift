@@ -40,9 +40,10 @@ class ConnectionManager {
 						let connection = Connection(line: line, direction: direction, arrivalMinutes: arrivalMinutes)
 						self.connections.append(connection)
 					}
-				}
 
-				callback()
+					// update UI only when everything has been pulled
+					callback()
+				}
 		}
 	}
 
