@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	// Settings window
 	@IBOutlet weak var settingsWindow: NSView!
+	@IBOutlet weak var settingsView: NSWindow!	
 	@IBOutlet weak var numRowsToShowLabel: NSTextField!
 	@IBOutlet weak var numRowsToShowStepper: NSStepper!
 
@@ -112,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
-
+		settingsView.makeKeyAndOrderFront(sender)
 	}
 	
 	@IBAction func selectStop(sender: NSMenuItem) {

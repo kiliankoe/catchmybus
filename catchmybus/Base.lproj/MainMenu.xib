@@ -16,6 +16,7 @@
                 <outlet property="manualRefreshButtonLabel" destination="wVY-tI-kkW" id="muF-LA-Msm"/>
                 <outlet property="numRowsToShowLabel" destination="3KG-eb-N4M" id="HLn-Q3-P7r"/>
                 <outlet property="numRowsToShowStepper" destination="ZHg-L8-ZL8" id="72E-Zq-QHV"/>
+                <outlet property="settingsView" destination="yyw-Gl-jrH" id="eJc-NA-xQ0"/>
                 <outlet property="settingsWindow" destination="8X9-PR-7NO" id="c4k-BD-7NG"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
                 <outlet property="stopLabelHelmholtz" destination="FBu-K8-M3m" id="jAy-fi-JfM"/>
@@ -709,7 +710,7 @@
             </items>
             <point key="canvasLocation" x="170.5" y="467.5"/>
         </menu>
-        <window title="catchmybus settings - v0.1" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="yyw-Gl-jrH">
+        <window title="catchmybus settings - v0.1" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="yyw-Gl-jrH">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="750" y="591" width="295" height="62"/>
