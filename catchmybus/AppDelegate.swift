@@ -14,12 +14,18 @@ import Alamofire
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-	@IBOutlet weak var statusMenu: NSMenu!
+	// Settings window
 	@IBOutlet weak var settingsWindow: NSView!
-	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
+	@IBOutlet weak var numRowsToShowLabel: NSTextField!
+	@IBOutlet weak var numRowsToShowStepper: NSStepper!
 
+	// NSMenu
+	@IBOutlet weak var statusMenu: NSMenu!
+	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
 	@IBOutlet weak var stopLabelHelmholtz: NSMenuItem!
 	@IBOutlet weak var stopLabelZelle: NSMenuItem!
+
+
 
 	var stopLabels: [NSMenuItem] = []
 
@@ -50,6 +56,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 		// load NSUserDefaults
 		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey("numRowsToShow")
+		numRowsToShowLabel.integerValue = numRowsToShow
+		numRowsToShowStepper.integerValue = numRowsToShow
 
 		// initialize timer to automatically call update() every minute
 		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
@@ -90,6 +98,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		})
 	}
 
+	// Settings window
+	@IBAction func numRowsToShowStepperClicked(sender: NSStepper) {
+		numRowsToShowLabel.integerValue = sender.integerValue
+		numRowsToShow = sender.integerValue
+	}
+
+
+
+	// NSMenu
 	@IBAction func refreshClicked(sender: NSMenuItem) {
 		update()
 	}
