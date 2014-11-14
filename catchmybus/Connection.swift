@@ -23,7 +23,13 @@ struct Connection {
 	}
 
 	func toString() -> String {
-		return "\(line) \(direction): \(arrivalMinutes) Minuten"
+		if (arrivalMinutes > 60) {
+			let hours = arrivalMinutes / 60
+			let minutes = arrivalMinutes % 60
+			return "\(line) \(direction): \(hours)h \(minutes) Minuten"
+		} else {
+			return "\(line) \(direction): \(arrivalMinutes) Minuten"
+		}
 	}
 
 }
