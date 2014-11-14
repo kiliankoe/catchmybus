@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3923C6301A1273FB00E8BA7E /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3923C62A1A12739400E8BA7E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		39A5AE431A160A6A0044396A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5AE421A160A6A0044396A /* Connection.swift */; };
+		39A5AE461A160DBA0044396A /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5AE451A160DBA0044396A /* ConnectionManager.swift */; };
 		39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */; };
 		39F3063D1A11B0D500CEAE43 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F3063C1A11B0D500CEAE43 /* Images.xcassets */; };
 		39F306401A11B0D500CEAE43 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F3063E1A11B0D500CEAE43 /* MainMenu.xib */; };
@@ -61,6 +63,8 @@
 
 /* Begin PBXFileReference section */
 		3923C6241A12739400E8BA7E /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		39A5AE421A160A6A0044396A /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		39A5AE451A160DBA0044396A /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		39F306351A11B0D500CEAE43 /* catchmybus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = catchmybus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F306391A11B0D500CEAE43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
+				39A5AE421A160A6A0044396A /* Connection.swift */,
+				39A5AE451A160DBA0044396A /* ConnectionManager.swift */,
 				39F3063C1A11B0D500CEAE43 /* Images.xcassets */,
 				39F3063E1A11B0D500CEAE43 /* MainMenu.xib */,
 				39F306381A11B0D500CEAE43 /* Supporting Files */,
@@ -278,6 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */,
+				39A5AE461A160DBA0044396A /* ConnectionManager.swift in Sources */,
+				39A5AE431A160A6A0044396A /* Connection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

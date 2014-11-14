@@ -23,9 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	var stopLabels: [NSMenuItem] = []
 
-	var selectedStop = "Helmholtzstrasse"
+	let cm = ConnectionManager()
 
-	var numberOfStopsListed = 0
+	var numRowsToShow = 5
+	var numShownRows = 0
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -44,74 +45,40 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		// fake a refresh when starting
 		refreshClicked(manualRefreshButtonLabel!)
 
-		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("updateUI"), userInfo: nil, repeats: true)
+		// initialize timer to automatically call update() every minute
+		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 	}
 
-	func updateUI() {
-		// let's fake this for now
-		refreshClicked(manualRefreshButtonLabel!)
-	}
+	func update() {
+		// clear connection rows in menu
+		for i in 0..<numShownRows {
+			self.statusMenu.removeItemAtIndex(0)
+		}
 
-	func cleanupURLString(dirty: String) -> String {
-		var string: NSString = dirty
-		string = string.stringByReplacingOccurrencesOfString(" ", withString: "")
-		string = string.stringByReplacingOccurrencesOfString("ä", withString: "ae")
-		string = string.stringByReplacingOccurrencesOfString("ö", withString: "oe")
-		string = string.stringByReplacingOccurrencesOfString("ü", withString: "ue")
-		string = string.stringByReplacingOccurrencesOfString("Ä", withString: "Ae")
-		string = string.stringByReplacingOccurrencesOfString("Ö", withString: "Oe")
-		string = string.stringByReplacingOccurrencesOfString("Ü", withString: "Ue")
-		string = string.stringByReplacingOccurrencesOfString("ß", withString: "ss")
+		// pull new data and update UI in callback
+		numShownRows = 0
+		cm.clear()
+		cm.update({
+			// update the statusMenu.title
+			// done twice on purpose to clear the necessary space
+			self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+			self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
 
-		return string as String
+			// loop through connections to update NSMenuItems
+			var i = 0
+			for connection in self.cm.connections {
+				if (i == self.numRowsToShow) {
+					break
+				}
+				self.statusMenu.insertItemWithTitle(connection.toString(), action: nil, keyEquivalent: "", atIndex: i)
+				self.numShownRows++
+				i++
+			}
+		})
 	}
 
 	@IBAction func refreshClicked(sender: NSMenuItem) {
-		let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(selectedStop)&lim=5"
-		Alamofire.request(.GET, requestURL)
-			.responseJSON { (_, _, JSON, error) in
-				if (error != nil) {
-					return
-				}
-
-				let resultsArray : [[String]] = JSON as [[String]]
-				if (resultsArray.count > 0) {
-					let firstResult = resultsArray[0]
-
-					// clear old entries
-					for i in 0..<self.numberOfStopsListed {
-						self.statusMenu.removeItemAtIndex(0)
-					}
-					self.numberOfStopsListed = 0
-
-					// set the next bus' arrivaltime in the statusbar title
-					var firstBusMinutes : String = firstResult[2]
-					if (firstBusMinutes == "") {
-						firstBusMinutes = "0"
-					}
-					let firstBusDirection : String = firstResult[1]
-					// Setting the title twice is done on purpose to clear the necessary space
-					self.statusItem.title = firstBusMinutes
-					self.statusItem.title = firstBusMinutes
-
-					// fill the menu with the other arriving busses
-					var i = 0
-					for result in resultsArray {
-						var resultMinutes : String = result[2]
-						if (resultMinutes == "") {
-							resultMinutes = "0"
-						}
-						let resultDirection : String = result[1]
-						let resultLine : String = result[0]
-
-						self.statusMenu.insertItemWithTitle("\(resultLine) \(resultDirection): \(resultMinutes) Minuten", action: nil, keyEquivalent: "", atIndex: i)
-						i++
-
-						// save the amount of listed stops so these can be removed at the next refresh
-						self.numberOfStopsListed++
-					}
-				}
-			}
+		update()
 	}
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
@@ -119,12 +86,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	@IBAction func selectStop(sender: NSMenuItem) {
-		self.selectedStop = cleanupURLString(sender.title)
+		self.cm.selectedStop = sender.title
 		for label in stopLabels {
 			label.state = NSOffState
 		}
 		sender.state = NSOnState
-		updateUI()
+		update()
 	}
 
 	@IBAction func quitButtonPressed(sender: NSMenuItem) {
