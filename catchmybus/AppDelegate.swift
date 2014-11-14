@@ -56,11 +56,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {
-		NSUserDefaults.standardUserDefaults().setObject(numRowsToShow, forKey: "numRowsToShow")
+		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
 	}
 
 	func update() {
-		NSLog("UPDATING")
+//		NSLog("UPDATING")
 
 		// clear connection rows in menu
 		for i in 0..<numShownRows {
@@ -86,7 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				self.numShownRows++
 				i++
 			}
-			NSLog("UPDATE FINISHED")
+//			NSLog("UPDATE FINISHED")
 		})
 	}
 
