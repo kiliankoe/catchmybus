@@ -91,7 +91,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				if (i == self.numRowsToShow) {
 					break
 				}
-				self.statusMenu.insertItemWithTitle(connection.toString(), action: nil, keyEquivalent: "", atIndex: i)
+				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: nil, keyEquivalent: "")
+				self.statusMenu.insertItem(connectionMenuItem, atIndex: i)
 				self.numShownRows++
 				i++
 			}

@@ -19,16 +19,21 @@ struct Connection {
 		self.line = line
 		self.direction = direction
 		self.arrivalMinutes = arrivalMinutes
-		self.arrivalTime = NSDate() // we'll do this later
+		self.arrivalTime = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * arrivalMinutes))
 	}
 
 	func toString() -> String {
+		// NSDate.dateWithCalendarFormat is actually deprecated as of OS X 10.10
+		// use .descriptionWithLocale instead
+		let dateformat = "%H:%M"
+		let timezone = NSTimeZone(abbreviation: "CEST")
+
 		if (arrivalMinutes > 59) {
 			let hours = arrivalMinutes / 60
 			let minutes = arrivalMinutes % 60
-			return "\(line) \(direction): \(hours)h \(minutes) Minuten"
+			return "\(line) \(direction): \(hours)h \(minutes) Minuten - \(arrivalTime.dateWithCalendarFormat(dateformat, timeZone: timezone))"
 		} else {
-			return "\(line) \(direction): \(arrivalMinutes) Minuten"
+			return "\(line) \(direction): \(arrivalMinutes) Minuten - \(arrivalTime.dateWithCalendarFormat(dateformat, timeZone: timezone))"
 		}
 	}
 
