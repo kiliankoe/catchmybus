@@ -35,6 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var numRowsToShow = 3	// how many rows are shown in the menu
 	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
 
+	var updateTime = 1		// how often in minutes the app updates the displayed number
+
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -52,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		update()
 
 		// initialize default NSUserDefaults
-		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : cm.stopDict]
+		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : cm.stopDict, "updateTime" : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// load NSUserDefaults
@@ -60,14 +62,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		numRowsToShowLabel.integerValue = numRowsToShow
 		numRowsToShowStepper.integerValue = numRowsToShow
 		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
+		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
 
 		// initialize timer to automatically call update() every minute
-		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+		var timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
 		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
+		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: "updateTime")
 	}
 
 	func update() {
