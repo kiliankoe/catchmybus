@@ -125,6 +125,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
 		settingsView.makeKeyAndOrderFront(sender)
+		NSApp.activateIgnoringOtherApps(true)
 	}
 	
 	@IBAction func selectStop(sender: NSMenuItem) {
