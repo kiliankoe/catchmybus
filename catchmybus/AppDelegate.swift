@@ -40,18 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		let icon = NSImage(named: "statusIcon")
-		icon?.setTemplate(true)
-
-		// Initialize stopLabels array (this stuff has got to move away from here eventually...)
-		// and definitely not be hardcoded like this
-		stopLabels.append(stopLabelHelmholtz)
-		stopLabels.append(stopLabelZelle)
-
-		statusItem.image = icon
-		statusItem.menu = statusMenu
-
-		update()
 
 		// initialize default NSUserDefaults
 		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : cm.stopDict, "updateTime" : 1]
@@ -64,7 +52,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
 		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
 
-		// initialize timer to automatically call update() every minute
+		// setup icons and NSMenuItems
+		setupUI()
+
+		// Update data and UI
+		update()
+
+		// initialize timer to automatically call update() how ever often updateTime states
 		var timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 	}
 
@@ -72,6 +66,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
 		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
 		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: "updateTime")
+	}
+
+	func setupUI() {
+		let icon = NSImage(named: "statusIcon")
+		icon?.setTemplate(true)
+
+		// Initialize stopLabels array (this stuff has got to move away from here eventually...)
+		// and definitely not be hardcoded like this
+		stopLabels.append(stopLabelHelmholtz)
+		stopLabels.append(stopLabelZelle)
+
+		statusItem.image = icon
+		statusItem.menu = statusMenu
 	}
 
 	func update() {
