@@ -32,8 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let cm = ConnectionManager()
 
-	var numRowsToShow = 3
-	var numShownRows = 0
+	var numRowsToShow = 3	// how many rows are shown in the menu
+	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -52,13 +52,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		update()
 
 		// initialize default NSUserDefaults
-		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow": 5]
+		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : cm.stopDict]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// load NSUserDefaults
 		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey("numRowsToShow")
 		numRowsToShowLabel.integerValue = numRowsToShow
 		numRowsToShowStepper.integerValue = numRowsToShow
+		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
 
 		// initialize timer to automatically call update() every minute
 		var timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
@@ -66,11 +67,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
+		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
 	}
 
 	func update() {
-//		NSLog("UPDATING")
-
 		// clear connection rows in menu
 		for i in 0..<numShownRows {
 			self.statusMenu.removeItemAtIndex(0)
@@ -96,7 +96,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				self.numShownRows++
 				i++
 			}
-//			NSLog("UPDATE FINISHED")
 		})
 	}
 

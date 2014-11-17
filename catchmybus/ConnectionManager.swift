@@ -11,39 +11,44 @@ import Alamofire
 
 class ConnectionManager {
 
+	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße" : 3, "Zellescher Weg" : 8]
 	var selectedStop = "Helmholtzstraße"
 
 	var connections = [Connection]()
 
 	func update(callback: () -> Void) {
-		let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(cleanupURLString(selectedStop))&lim=30"
-		Alamofire.request(.GET, requestURL)
-			.responseJSON { (_, _, JSON, error) in
-				if (error != nil) {
-					return
-				}
-
-				let resultsArray : [[String]] = JSON as [[String]]
-				if (resultsArray.count > 0) {
-
-					for result in resultsArray {
-
-						let line = result[0]
-						let direction = result[1]
-						var arrivalMinutes: Int
-						if (result[2] == "") {
-							arrivalMinutes = 0
-						} else {
-							arrivalMinutes = result[2].toInt()!
-						}
-
-						let connection = Connection(line: line, direction: direction, arrivalMinutes: arrivalMinutes)
-						self.connections.append(connection)
+		if let vz = stopDict[selectedStop] {
+			let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(cleanupURLString(selectedStop))&lim=30&vz=\(vz)"
+			Alamofire.request(.GET, requestURL)
+				.responseJSON { (_, _, JSON, error) in
+					if (error != nil) {
+						return
 					}
 
-					// update UI only when everything has been pulled
-					callback()
-				}
+					let resultsArray : [[String]] = JSON as [[String]]
+					if (resultsArray.count > 0) {
+
+						for result in resultsArray {
+
+							let line = result[0]
+							let direction = result[1]
+							var arrivalMinutes: Int
+							if (result[2] == "") {
+								arrivalMinutes = 0
+							} else {
+								arrivalMinutes = result[2].toInt()!
+							}
+
+							let connection = Connection(line: line, direction: direction, arrivalMinutes: arrivalMinutes)
+							self.connections.append(connection)
+						}
+
+						// update UI only when everything has been pulled
+						callback()
+					}
+			}
+		} else {
+			NSLog("Couldn't find the selected stop in stopDict. This is entirely the user's fault.")
 		}
 	}
 
