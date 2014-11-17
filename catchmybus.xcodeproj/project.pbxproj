@@ -64,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		3923C6241A12739400E8BA7E /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		39432B0F1A1A930C00190A42 /* catchmybus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = catchmybus.entitlements; sourceTree = "<group>"; };
 		397278991A1800140051C208 /* ConnectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMenuItem.swift; sourceTree = "<group>"; };
 		39A5AE421A160A6A0044396A /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		39A5AE451A160DBA0044396A /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		39F306371A11B0D500CEAE43 /* catchmybus */ = {
 			isa = PBXGroup;
 			children = (
+				39432B0F1A1A930C00190A42 /* catchmybus.entitlements */,
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
 				39A5AE421A160A6A0044396A /* Connection.swift */,
 				39A5AE451A160DBA0044396A /* ConnectionManager.swift */,
@@ -213,6 +215,11 @@
 				TargetAttributes = {
 					39F306341A11B0D500CEAE43 = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					39F306441A11B0D500CEAE43 = {
 						CreatedOnToolsVersion = 6.1;
@@ -409,6 +416,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = catchmybus/catchmybus.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = catchmybus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -421,6 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = catchmybus/catchmybus.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = catchmybus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
