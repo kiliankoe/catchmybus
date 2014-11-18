@@ -1,6 +1,10 @@
 #catchmybus
 
-A simple little app that lives in the Mac's menubar and displays when the next bus or tram leaves the stop you specify (in Dresden, Germany).
+A simple little app that lives in the Mac's menubar and displays when the next bus or tram leaves the stop you specify (in Dresden, Germany). Runs on OS X 10.9 Mavericks and 10.10 Yosemite.
+
+## Download
+
+Coming soon :blush:
 
 ## Screenshot
 
@@ -10,7 +14,7 @@ Not even close to being finished, but this is an idea as to where it's headed:
 
 ## Compiling
 
-You'll need a Mac running OS X 10.10 Yosemite as it's unfortunately not possible to build Swift apps for anything below. What a shame.
+You'll need a Mac running OS X 10.10 Yosemite as it's unfortunately not possible to build Swift apps on anything below. You'll still be able to run the app on Mavericks though. Check the [releases](https://github.com/kiliankoe/catchmybus/releases) page.
 
 Be sure to also check out [Alamofire](https://github.com/alamofire/alamofire) (or clone it to the project directory manually) as this fantastic framework is used for the HTTP requests.
 
