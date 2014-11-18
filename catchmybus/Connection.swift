@@ -8,18 +8,18 @@
 
 import Foundation
 
-struct Connection {
+class Connection {
 
 	let line: String
 	let direction: String
 	let arrivalMinutes: Int
-	let arrivalTime: NSDate
+	let arrivalDate: NSDate
 
 	init (line: String, direction: String, arrivalMinutes: Int) {
 		self.line = line
 		self.direction = direction
 		self.arrivalMinutes = arrivalMinutes
-		self.arrivalTime = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * arrivalMinutes))
+		self.arrivalDate = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * arrivalMinutes))
 	}
 
 	func toString() -> String {
@@ -31,9 +31,9 @@ struct Connection {
 		if (arrivalMinutes > 59) {
 			let hours = arrivalMinutes / 60
 			let minutes = arrivalMinutes % 60
-			return "\(line) \(direction): \(hours)h \(minutes) Minuten - \(arrivalTime.dateWithCalendarFormat(dateformat, timeZone: timezone))"
+			return "\(line) \(direction): \(hours)h \(minutes) Minuten - \(arrivalDate.dateWithCalendarFormat(dateformat, timeZone: timezone))"
 		} else {
-			return "\(line) \(direction): \(arrivalMinutes) Minuten - \(arrivalTime.dateWithCalendarFormat(dateformat, timeZone: timezone))"
+			return "\(line) \(direction): \(arrivalMinutes) Minuten - \(arrivalDate.dateWithCalendarFormat(dateformat, timeZone: timezone))"
 		}
 	}
 

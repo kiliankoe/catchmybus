@@ -107,8 +107,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			} else {
 				// update the statusMenu.title
 				// done twice on purpose to clear the necessary space
-				self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
-				self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+				if let firstBusArrivalMinutes = self.cm.connections.first?.arrivalMinutes {
+					self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+					self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+				}
 			}
 
 			// loop through connections to update NSMenuItems
@@ -164,7 +166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	func connectionSelected(sender: ConnectionMenuItem) {
 //		NSLog("Set a notification for \(sender.connection.toString())")
-		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalTime)
+		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalDate)
 
 		// register notification to be sent at time of notification
 		let notification = NSUserNotification()
