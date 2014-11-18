@@ -35,12 +35,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var numRowsToShow = 3	// how many rows are shown in the menu
 	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
 
-	var updateTime = 1		// how often in minutes the app updates the displayed number
+	var updateTime = 1		// how often in minutes the app calls update()
+
+	var notificationSet = false
+	var notificationTime = NSDate()
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-
 		// initialize default NSUserDefaults
 		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : cm.stopDict, "updateTime" : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
@@ -59,7 +61,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		update()
 
 		// initialize timer to automatically call update() how ever often updateTime states
-		var timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+		let timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+
+		// check the notification every 15 seconds
+		let notificationTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("updateNotification"), userInfo: nil, repeats: true)
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {
@@ -79,6 +84,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 		statusItem.image = icon
 		statusItem.menu = statusMenu
+	}
+
+	func updateNotification() {
+		if notificationSet {
+			let currentDate = NSDate()
+//			NSLog("Notification is set, and current date: \(currentDate.description)")
+//			NSLog("Date of notification:                  \(notificationTime.description)")
+			if (currentDate.laterDate(notificationTime) == currentDate) {
+				NSLog("This is a notification, at least for now.")
+				notificationSet = false
+			}
+		}
 	}
 
 	func update() {
@@ -102,7 +119,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				if (i == self.numRowsToShow) {
 					break
 				}
-				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: nil, keyEquivalent: "")
+				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
 				self.statusMenu.insertItem(connectionMenuItem, atIndex: i)
 				self.numShownRows++
 				i++
@@ -139,6 +156,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBAction func quitButtonPressed(sender: NSMenuItem) {
 		NSApplication.sharedApplication().terminate(self)
+	}
+
+	func connectionSelected(sender: ConnectionMenuItem) {
+		NSLog("Set a notification for \(sender.connection.toString())")
+		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalTime)
+		notificationSet = true
+		// this is temporary for now, ConnectionManager will have to able to track
+		// connections for this to be a viable option
+		sender.state = NSOnState
 	}
 }
 
