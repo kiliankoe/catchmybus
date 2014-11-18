@@ -38,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	var updateTime = 1		// how often in minutes the app calls update()
 
 	var notificationTime = NSDate()
+	var notificationBlockingstatusItem = false
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -100,10 +101,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numShownRows = 0
 		cm.clear()
 		cm.update({
-			// update the statusMenu.title
-			// done twice on purpose to clear the necessary space
-			self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
-			self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+			if self.notificationBlockingstatusItem {
+				self.statusItem.title = "WFN" // Waiting for Notification
+				self.statusItem.title = "WFN" // this has to wait for the new connection management
+			} else {
+				// update the statusMenu.title
+				// done twice on purpose to clear the necessary space
+				self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+				self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+			}
 
 			// loop through connections to update NSMenuItems
 			var i = 0
@@ -117,6 +123,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 				i++
 			}
 		})
+
+		// show new busses in the menubar after a notified connection is through
+		let currentTime = NSDate()
+		if (currentTime.laterDate(notificationTime.dateByAddingTimeInterval(NSTimeInterval(15 * 60))) == currentTime) {
+			notificationBlockingstatusItem = false
+		}
 	}
 
 	// Settings window
@@ -161,9 +173,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		notification.deliveryDate = notificationTime
 		NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
 
+		notificationBlockingstatusItem = true
+
 		// this is temporary for now, ConnectionManager will have to able to track
 		// connections for this to be a viable option
 		sender.state = NSOnState
+
+		// update UI for the new statusitem.title
+		update()
 	}
 }
 
