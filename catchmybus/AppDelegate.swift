@@ -12,7 +12,7 @@ import Cocoa
 import Alamofire
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
 	// Settings window
 	@IBOutlet weak var settingsWindow: NSView!
@@ -37,7 +37,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	var updateTime = 1		// how often in minutes the app calls update()
 
-	var notificationSet = false
 	var notificationTime = NSDate()
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
@@ -63,14 +62,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		// initialize timer to automatically call update() how ever often updateTime states
 		let timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 
-		// check the notification every 15 seconds
-		let notificationTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("updateNotification"), userInfo: nil, repeats: true)
+		// necessary for sending notifications when app is not active
+		NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
 		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
 		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: "updateTime")
+	}
+
+	// necessary for sending notifications when app is not active
+	func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+		return true
 	}
 
 	func setupUI() {
@@ -84,18 +88,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 		statusItem.image = icon
 		statusItem.menu = statusMenu
-	}
-
-	func updateNotification() {
-		if notificationSet {
-			let currentDate = NSDate()
-//			NSLog("Notification is set, and current date: \(currentDate.description)")
-//			NSLog("Date of notification:                  \(notificationTime.description)")
-			if (currentDate.laterDate(notificationTime) == currentDate) {
-				NSLog("This is a notification, at least for now.")
-				notificationSet = false
-			}
-		}
 	}
 
 	func update() {
@@ -159,9 +151,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func connectionSelected(sender: ConnectionMenuItem) {
-		NSLog("Set a notification for \(sender.connection.toString())")
+//		NSLog("Set a notification for \(sender.connection.toString())")
 		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalTime)
-		notificationSet = true
+
+		// register notification to be sent at time of notification
+		let notification = NSUserNotification()
+		notification.title = "Catch your bus!"
+		notification.informativeText = "Your bus is leaving soon."
+		notification.deliveryDate = notificationTime
+		NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+
 		// this is temporary for now, ConnectionManager will have to able to track
 		// connections for this to be a viable option
 		sender.state = NSOnState
