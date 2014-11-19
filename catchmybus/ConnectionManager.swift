@@ -15,11 +15,12 @@ class ConnectionManager {
 	var selectedStop = "Helmholtzstraße"
 
 	var connections = [Connection]()
-	var tmpConnections = [Connection]()
+//	var tmpConnections = [Connection]()
 
 	func update(callback: () -> Void) {
 		if let vz = stopDict[selectedStop] {
 			let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(cleanupURLString(selectedStop))&lim=30&vz=\(vz)"
+//			NSLog(requestURL)
 			Alamofire.request(.GET, requestURL)
 				.responseJSON { (_, _, JSON, error) in
 					if (error != nil) {
@@ -30,7 +31,7 @@ class ConnectionManager {
 					if (resultsArray.count > 0) {
 						for result in resultsArray {
 
-							// rip the current string array into single components
+							// rip a single connection's string array into its single components
 							let line = result[0]
 							let direction = result[1]
 							var arrivalMinutes: Int
@@ -40,46 +41,24 @@ class ConnectionManager {
 								arrivalMinutes = result[2].toInt()!
 							}
 							let newConnection = Connection(line: line, direction: direction, arrivalMinutes: arrivalMinutes)
-//							println("\(newConnection.line) \(newConnection.direction) - \(newConnection.arrivalMinutes)")
 
-							// all of this just feels so dirty
-							var numberOldConnections = self.connections.count
-							var	numberNewConnections = 0
-							var connectionAlreadyExists = false
-
-							// make sure the very first connection on start is saved
-							if (self.connections.isEmpty && self.tmpConnections.isEmpty) {
-								numberNewConnections++
-								self.tmpConnections.append(newConnection)
-							}
-
-							// loop through all known connections and check if they're already known or within 90 seconds of each other
-							// if so they're not added again
-							for connection in self.tmpConnections {
-								numberNewConnections++
+							// Cycle through all previously known connections to see if this one already exists.
+							// For this the arrivaldates are compared and two connections are declared identical
+							// if all their data matches and the arrivaldates are within 90 seconds of another.
+							var i = 0
+							for connection in self.connections {
+								i++
 								let dateDiff = NSTimeInterval(connection.arrivalDate.timeIntervalSinceDate(newConnection.arrivalDate))
-								if (connection.line == line && connection.direction == direction && abs(dateDiff) < 90) {
-									connectionAlreadyExists = true
-//									println("Not adding:")
-//									println("\(connection.line) \(connection.direction) - \(connection.arrivalMinutes)")
+								if (connection.line == newConnection.line && connection.direction == newConnection.direction && abs(dateDiff) < 90) {
 									break
 								}
 							}
 
-							// it really is a new connection, add it
-							if (numberNewConnections >= numberOldConnections && !connectionAlreadyExists) {
-								self.tmpConnections.append(newConnection)
+							if (i == self.connections.count || self.connections.count == 0) {
+								self.connections.append(newConnection)
 							}
-							numberNewConnections = 0
-							connectionAlreadyExists = false
 						}
 
-						self.connections = self.tmpConnections
-						self.tmpConnections.removeAll(keepCapacity: false)
-
-//						println("\(self.connections.count) connections saved")
-
-						// update UI only when everything has been pulled
 						callback()
 					}
 			}
@@ -90,7 +69,7 @@ class ConnectionManager {
 
 	func clear() {
 		// filter out any connections that have already passed the current time
-		tmpConnections = connections.filter({(c: Connection) -> Bool in
+		connections.filter({(c: Connection) -> Bool in
 			let currentDate = NSDate()
 			if (currentDate.laterDate(c.arrivalDate) == c.arrivalDate) {
 				return false
@@ -98,9 +77,10 @@ class ConnectionManager {
 				return true
 			}
 		})
+	}
 
-		connections = tmpConnections
-		tmpConnections.removeAll(keepCapacity: false)
+	func nuke() {
+		connections.removeAll(keepCapacity: false)
 	}
 
 	func cleanupURLString(dirty: String) -> String {

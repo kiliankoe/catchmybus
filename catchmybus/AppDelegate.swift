@@ -120,6 +120,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 					break
 				}
 				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
+				if connection.selected {
+					connectionMenuItem.state = NSOnState
+				}
 				self.statusMenu.insertItem(connectionMenuItem, atIndex: i)
 				self.numShownRows++
 				i++
@@ -157,6 +160,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			label.state = NSOffState
 		}
 		sender.state = NSOnState
+		cm.nuke()
 		update()
 	}
 
@@ -165,8 +169,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	func connectionSelected(sender: ConnectionMenuItem) {
-//		NSLog("Set a notification for \(sender.connection.toString())")
+		NSLog("Set a notification for \(sender.connection.toString())")
 		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalDate)
+
+		// TODO: Send a notification right now stating when the user will be notified
 
 		// register notification to be sent at time of notification
 		let notification = NSUserNotification()
@@ -177,9 +183,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		notificationBlockingstatusItem = true
 
-		// this is temporary for now, ConnectionManager will have to able to track
-		// connections for this to be a viable option
-		sender.state = NSOnState
+		sender.connection.selected = true
 
 		// update UI for the new statusitem.title
 		update()

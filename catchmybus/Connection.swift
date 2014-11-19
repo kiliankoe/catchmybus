@@ -15,6 +15,8 @@ class Connection {
 	let arrivalMinutes: Int
 	let arrivalDate: NSDate
 
+	var selected = false
+
 	init (line: String, direction: String, arrivalMinutes: Int) {
 		self.line = line
 		self.direction = direction
