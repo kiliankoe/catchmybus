@@ -38,6 +38,8 @@ class Connection {
 			let hours = arrivalMinutes / 60
 			let minutes = arrivalMinutes % 60
 			return "\(line) \(direction): \(hours)h \(minutes) Minuten - \(arrivalDate.dateWithCalendarFormat(dateformat, timeZone: timezone))"
+		} else if (arrivalMinutes == 0) {
+			return "\(line) \(direction): Now - \(arrivalDate.dateWithCalendarFormat(dateformat, timeZone: timezone))"
 		} else {
 			return "\(line) \(direction): \(arrivalMinutes) Minuten - \(arrivalDate.dateWithCalendarFormat(dateformat, timeZone: timezone))"
 		}
