@@ -75,15 +75,18 @@ class ConnectionManager {
 	}
 
 	func clear() {
-		// filter out any connections that have already passed the current time
-		connections = connections.filter({(c: Connection) -> Bool in
-			let currentDate = NSDate()
-			if (currentDate.laterDate(c.arrivalDate) == c.arrivalDate) {
-				return true
-			} else {
-				return false
-			}
-		})
+		// filter out any connections that have already passed the vz time
+		if let vz = stopDict[selectedStop] {
+			connections = connections.filter({(c: Connection) -> Bool in
+				let vzTime = NSDate(timeIntervalSinceNow: NSTimeInterval(vz * 60))
+				println("\(vzTime.description)")
+				if (vzTime.laterDate(c.arrivalDate) == c.arrivalDate) {
+					return true
+				} else {
+					return false
+				}
+			})
+		}
 	}
 
 	func nuke() {
