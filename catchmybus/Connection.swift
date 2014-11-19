@@ -12,7 +12,7 @@ class Connection {
 
 	let line: String
 	let direction: String
-	let arrivalMinutes: Int
+	var arrivalMinutes: Int
 	let arrivalDate: NSDate
 
 	var selected = false
@@ -24,9 +24,13 @@ class Connection {
 		self.arrivalDate = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * arrivalMinutes))
 	}
 
+	func update(cd: NSDate) {
+		arrivalMinutes = Int(arrivalDate.timeIntervalSinceDate(cd)) / 60
+	}
+
 	func toString() -> String {
 		// NSDate.dateWithCalendarFormat is actually deprecated as of OS X 10.10
-		// use .descriptionWithLocale instead
+		// TODO: use .descriptionWithLocale instead
 		let dateformat = "%H:%M"
 		let timezone = NSTimeZone(abbreviation: "CEST")
 

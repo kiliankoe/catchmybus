@@ -15,7 +15,8 @@ class ConnectionManager {
 	var selectedStop = "Helmholtzstraße"
 
 	var connections = [Connection]()
-//	var tmpConnections = [Connection]()
+	// need something here, and I don't feel like checking for an optional on the other end
+	var selectedConnection: Connection = Connection(line: "", direction: "", arrivalMinutes: 1337)
 
 	func update(callback: () -> Void) {
 		if let vz = stopDict[selectedStop] {
@@ -48,7 +49,7 @@ class ConnectionManager {
 							var i = 0
 							for connection in self.connections {
 								i++
-								let dateDiff = NSTimeInterval(connection.arrivalDate.timeIntervalSinceDate(newConnection.arrivalDate))
+								let dateDiff = connection.arrivalDate.timeIntervalSinceDate(newConnection.arrivalDate)
 								if (connection.line == newConnection.line && connection.direction == newConnection.direction && abs(dateDiff) < 90) {
 									break
 								}
@@ -64,6 +65,12 @@ class ConnectionManager {
 			}
 		} else {
 			NSLog("Couldn't find the selected stop in stopDict. This is entirely the user's fault.")
+		}
+
+		// update the arrivalminutes for connections that are not new
+		for connection in connections {
+			let currentDate = NSDate()
+			connection.update(currentDate)
 		}
 	}
 
@@ -81,6 +88,14 @@ class ConnectionManager {
 
 	func nuke() {
 		connections.removeAll(keepCapacity: false)
+	}
+
+	func selectConnection(c: Connection) {
+		for connection in connections {
+			connection.selected = false
+		}
+		c.selected = true
+		selectedConnection = c
 	}
 
 	func cleanupURLString(dirty: String) -> String {

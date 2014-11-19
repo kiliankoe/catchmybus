@@ -102,8 +102,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		cm.clear()
 		cm.update({
 			if self.notificationBlockingstatusItem {
-				self.statusItem.title = "WFN" // Waiting for Notification
-				self.statusItem.title = "WFN" // this has to wait for the new connection management
+				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)" // Waiting for Notification
+				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)" // this has to wait for the new connection management
 			} else {
 				// update the statusMenu.title
 				// done twice on purpose to clear the necessary space
@@ -169,7 +169,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	func connectionSelected(sender: ConnectionMenuItem) {
-		NSLog("Set a notification for \(sender.connection.toString())")
+//		NSLog("Set a notification for \(sender.connection.toString())")
 		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalDate)
 
 		// TODO: Send a notification right now stating when the user will be notified
@@ -183,6 +183,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		notificationBlockingstatusItem = true
 
+		cm.selectConnection(sender.connection)
 		sender.connection.selected = true
 
 		// update UI for the new statusitem.title
