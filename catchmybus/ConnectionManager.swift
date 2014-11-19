@@ -76,12 +76,12 @@ class ConnectionManager {
 
 	func clear() {
 		// filter out any connections that have already passed the current time
-		connections.filter({(c: Connection) -> Bool in
+		connections = connections.filter({(c: Connection) -> Bool in
 			let currentDate = NSDate()
 			if (currentDate.laterDate(c.arrivalDate) == c.arrivalDate) {
-				return false
-			} else {
 				return true
+			} else {
+				return false
 			}
 		})
 	}
