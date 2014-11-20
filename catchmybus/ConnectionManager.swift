@@ -100,6 +100,8 @@ class ConnectionManager {
 		selectedConnection = c
 	}
 
+	// Don't look at me, this isn't right. Not at all, I know that...
+	// This will be kicked very soon, I've just never touched pretty NSURL awesomness before^^
 	func cleanupURLString(dirty: String) -> String {
 		var string: NSString = dirty
 		string = string.stringByReplacingOccurrencesOfString(" ", withString: "")
