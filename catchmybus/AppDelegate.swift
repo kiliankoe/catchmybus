@@ -120,8 +120,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 				// update the statusMenu.title
 				// done twice on purpose to clear the necessary space
 				if let firstBusArrivalMinutes = self.cm.connections.first?.arrivalMinutes {
-					self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
-					self.statusItem.title = "\(self.cm.connections.first!.arrivalMinutes)"
+					self.statusItem.title = "\(firstBusArrivalMinutes)"
+					self.statusItem.title = "\(firstBusArrivalMinutes)"
 				}
 			}
 
@@ -211,9 +211,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// clear a possible previous notification
 		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
 
-		// TODO: Send a notification right now stating when the user will be notified
+		let cd = NSDate()
+		if (showNotifications && notificationTime.laterDate(cd) == notificationTime) {
+			// send a notification right now to tell the user when he's being notified again
+			let tmpnotification = NSUserNotification()
+			tmpnotification.title = "Got it!"
+			// NSDate.dateWithCalendarFormat is actually deprecated as of OS X 10.10
+			// TODO: use .descriptionWithLocale instead
+			let dateformat = "%H:%M"
+			let timezone = NSTimeZone(abbreviation: "CEST")
+			tmpnotification.informativeText = "You'll receive a notification at \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone))."
+			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(tmpnotification)
 
-		if showNotifications {
 			// register notification to be sent at time of notification
 			notification = NSUserNotification()
 			notification.title = "Catch your bus!"
