@@ -225,8 +225,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 			// register notification to be sent at time of notification
 			notification = NSUserNotification()
-			notification.title = "Catch your bus!"
-			notification.informativeText = "Your bus is leaving soon."
+			if (sender.connection.line.toInt() > 20) {
+				// it's a bus!
+				notification.title = "Catch your bus!"
+				// TODO: Replace \(15) with the notification time set for a single stop. This obviously isn't happening yet^^
+				notification.informativeText = "Your bus \(sender.connection.line) \(sender.connection.direction) is arriving at \(cm.selectedStop) in \(15) minutes."
+			} else {
+				// it's a tram!
+				notification.title = "Catch your tram!"
+				notification.informativeText = "Your tram \(sender.connection.line) \(sender.connection.direction) is arriving at \(cm.selectedStop) in \(15) minutes."
+			}
 			notification.deliveryDate = notificationTime
 			NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
 		}
