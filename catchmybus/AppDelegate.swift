@@ -184,6 +184,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	@IBAction func clearNotificationButtonPressed(sender: NSMenuItem) {
 		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
+		for c in cm.connections {
+			c.selected = false
+		}
+		notificationBlockingstatusItem = false
+		update()
 	}
 	
 	@IBAction func selectStop(sender: NSMenuItem) {
