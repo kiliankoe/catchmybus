@@ -1,16 +1,20 @@
 #catchmybus
 
-A simple little app that lives in the Mac's menubar and displays when the next bus or tram leaves the stop you specify (in Dresden, Germany). Runs on OS X 10.9 Mavericks and 10.10 Yosemite.
+A simple little app that lives in the Mac's menubar and displays when the next bus or tram leaves the stop you specify (in Dresden, Germany).
+You can also choose a specific bus or tram to be notified about when it's getting close.
+
+The selection of custom stops is unfortunately not possible quite yet. It's coming :blush:
+
+Runs on OS X 10.9 Mavericks and 10.10 Yosemite.
 
 ## Download
 
-Coming soon :blush:
+Check the [releases](https://github.com/kiliankoe/catchmybus/releases) page for downloading the most current version.
 
-## Screenshot
+## Screenshots
 
-Not even close to being finished, but this is an idea as to where it's headed:
-
-![screenshot](./screenshot.png)
+![screenshot](./screenshot1.png)
+![screenshot](./screenshot2.png)
 
 ## Compiling
 
@@ -31,4 +35,4 @@ After cloning Xcode will also ask you for your developer account when trying to 
 
 ## Credits
 
-Name shamelessly stolen from [hoodie/catch-my-bus](https://github.com/hoodie/catch-my-bus).
+Name and idea shamelessly stolen from [hoodie/catch-my-bus](https://github.com/hoodie/catch-my-bus).
