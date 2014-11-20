@@ -79,7 +79,6 @@ class ConnectionManager {
 		if let vz = stopDict[selectedStop] {
 			connections = connections.filter({(c: Connection) -> Bool in
 				let vzTime = NSDate(timeIntervalSinceNow: NSTimeInterval(vz * 60))
-				println("\(vzTime.description)")
 				if (vzTime.laterDate(c.arrivalDate) == c.arrivalDate) {
 					return true
 				} else {

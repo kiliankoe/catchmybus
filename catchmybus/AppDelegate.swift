@@ -15,10 +15,12 @@ import Alamofire
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
 	// Settings window
-	@IBOutlet weak var settingsWindow: NSView!
-	@IBOutlet weak var settingsView: NSWindow!	
+	@IBOutlet weak var settingsWindow: NSWindow!
 	@IBOutlet weak var numRowsToShowLabel: NSTextField!
 	@IBOutlet weak var numRowsToShowStepper: NSStepper!
+	@IBOutlet weak var updateTimeLabel: NSTextField!
+	@IBOutlet weak var updateTimeStepper: NSStepper!
+	@IBOutlet weak var notificationsCheckbox: NSButton!
 
 	// NSMenu
 	@IBOutlet weak var statusMenu: NSMenu!
@@ -35,6 +37,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
 
 	var updateTime = 1		// how often in minutes the app calls update()
+
+	var showNotifications = true	// if the app should show notifications or not
 
 	var notificationTime = NSDate()
 	var notificationBlockingstatusItem = false
@@ -84,14 +88,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// Initialize stops
 		for stop in cm.stopDict {
 			let stopMenuItem = NSMenuItem(title: stop.0, action: Selector("selectStop:"), keyEquivalent: "")
-			println("\(stopMenuItem.title)")
 			stopLabels.append(stopMenuItem)
 			statusMenu.insertItem(stopMenuItem, atIndex: 1)
 		}
 		// By default 'Helmholtzstraße' would be selected, even if the user does not
 		// have this stop in their list. Select the first of the user's stops on startup.
 		if let firstStop = stopLabels.first {
-			selectStop(firstStop)
+			cm.selectedStop = firstStop.title
+			firstStop.state = NSOnState
 		}
 
 		statusItem.image = icon
@@ -149,7 +153,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numRowsToShow = sender.integerValue
 	}
 
+	@IBAction func updateTimeStepperClicked(sender: NSStepper) {
+		updateTimeLabel.integerValue = sender.integerValue
+		updateTime = sender.integerValue
+	}
 
+	@IBAction func notificationsCheckboxClicked(sender: NSButton) {
+		if (sender.state == NSOnState) {
+			showNotifications = true
+		} else {
+			showNotifications = false
+		}
+	}
 
 	// NSMenu
 	@IBAction func refreshClicked(sender: NSMenuItem) {
@@ -157,7 +172,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
-		settingsView.makeKeyAndOrderFront(sender)
+		settingsWindow.makeKeyAndOrderFront(sender)
 		NSApp.activateIgnoringOtherApps(true)
 	}
 
@@ -186,12 +201,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		// TODO: Send a notification right now stating when the user will be notified
 
-		// register notification to be sent at time of notification
-		let notification = NSUserNotification()
-		notification.title = "Catch your bus!"
-		notification.informativeText = "Your bus is leaving soon."
-		notification.deliveryDate = notificationTime
-		NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+		if showNotifications {
+			// register notification to be sent at time of notification
+			let notification = NSUserNotification()
+			notification.title = "Catch your bus!"
+			notification.informativeText = "Your bus is leaving soon."
+			notification.deliveryDate = notificationTime
+			NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+		}
 
 		notificationBlockingstatusItem = true
 
