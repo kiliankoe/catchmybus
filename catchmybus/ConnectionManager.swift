@@ -11,7 +11,7 @@ import Alamofire
 
 class ConnectionManager {
 
-	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße" : 3, "Zellescher Weg" : 8]
+	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße" : 3, "Zellescher Weg" : 8, "Heinrich-Zille-Straße" : 10, "Technische Universität" : 1]
 	var selectedStop = "Helmholtzstraße"
 
 	var connections = [Connection]()

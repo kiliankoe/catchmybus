@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
@@ -19,8 +20,6 @@
                 <outlet property="settingsView" destination="yyw-Gl-jrH" id="eJc-NA-xQ0"/>
                 <outlet property="settingsWindow" destination="8X9-PR-7NO" id="c4k-BD-7NG"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
-                <outlet property="stopLabelHelmholtz" destination="FBu-K8-M3m" id="jAy-fi-JfM"/>
-                <outlet property="stopLabelZelle" destination="Dmm-OD-mf1" id="dEP-RL-xUg"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -676,18 +675,6 @@
         <menu id="KpV-aS-2O2">
             <items>
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
-                <menuItem title="Helmholtzstraße" state="on" id="FBu-K8-M3m">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="selectStop:" target="Voe-Tx-rLC" id="onH-8f-rgB"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Zellescher Weg" id="Dmm-OD-mf1">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="selectStop:" target="Voe-Tx-rLC" id="l5V-W5-vIH"/>
-                    </connections>
-                </menuItem>
                 <menuItem isSeparatorItem="YES" id="g56-u2-k8W"/>
                 <menuItem title="Manual refresh" id="wVY-tI-kkW">
                     <modifierMask key="keyEquivalentModifierMask"/>

@@ -23,10 +23,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	// NSMenu
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
-	@IBOutlet weak var stopLabelHelmholtz: NSMenuItem!
-	@IBOutlet weak var stopLabelZelle: NSMenuItem!
-
-
 
 	var stopLabels: [NSMenuItem] = []
 
@@ -82,10 +78,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		let icon = NSImage(named: "statusIcon")
 		icon?.setTemplate(true)
 
-		// Initialize stopLabels array (this stuff has got to move away from here eventually...)
-		// and definitely not be hardcoded like this
-		stopLabels.append(stopLabelHelmholtz)
-		stopLabels.append(stopLabelZelle)
+		// Initialize stops
+		for stop in cm.stopDict {
+			let stopMenuItem = NSMenuItem(title: stop.0, action: Selector("selectStop:"), keyEquivalent: "")
+			println("\(stopMenuItem.title)")
+			stopLabels.append(stopMenuItem)
+			statusMenu.insertItem(stopMenuItem, atIndex: 1)
+		}
+		// By default 'Helmholtzstraße' would be selected, even if the user does not
+		// have this stop in their list. Select the first of the user's stops on startup.
+		if let firstStop = stopLabels.first {
+			selectStop(firstStop)
+		}
 
 		statusItem.image = icon
 		statusItem.menu = statusMenu
