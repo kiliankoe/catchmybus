@@ -24,6 +24,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
 
+	// About window
+	@IBOutlet weak var aboutWindow: NSWindow!
+
 	var stopLabels: [NSMenuItem] = []
 
 	let cm = ConnectionManager()
@@ -155,6 +158,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
 		settingsView.makeKeyAndOrderFront(sender)
+		NSApp.activateIgnoringOtherApps(true)
+	}
+
+	@IBAction func aboutButtonPressed(sender: NSMenuItem) {
+		aboutWindow.makeKeyAndOrderFront(sender)
 		NSApp.activateIgnoringOtherApps(true)
 	}
 	

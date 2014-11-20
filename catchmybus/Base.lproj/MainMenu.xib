@@ -14,6 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="catchmybus" customModuleProvider="target">
             <connections>
+                <outlet property="aboutWindow" destination="Sbq-5z-V1y" id="v3f-WK-NOa"/>
                 <outlet property="manualRefreshButtonLabel" destination="wVY-tI-kkW" id="muF-LA-Msm"/>
                 <outlet property="numRowsToShowLabel" destination="3KG-eb-N4M" id="HLn-Q3-P7r"/>
                 <outlet property="numRowsToShowStepper" destination="ZHg-L8-ZL8" id="72E-Zq-QHV"/>
@@ -688,6 +689,12 @@
                         <action selector="settingsButtonPressed:" target="Voe-Tx-rLC" id="9Tx-02-8ot"/>
                     </connections>
                 </menuItem>
+                <menuItem title="About..." id="ygB-k9-2Ux">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="aboutButtonPressed:" target="Voe-Tx-rLC" id="wiZ-8G-Iyn"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Quit" id="xM6-rW-caG">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -700,7 +707,7 @@
         <window title="catchmybus settings - v0.1" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="yyw-Gl-jrH">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="750" y="591" width="295" height="62"/>
+            <rect key="contentRect" x="840" y="655" width="295" height="62"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="8X9-PR-7NO">
                 <rect key="frame" x="0.0" y="0.0" width="295" height="62"/>
@@ -733,5 +740,68 @@
             </view>
             <point key="canvasLocation" x="507.5" y="409"/>
         </window>
+        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="OaJ-37-zI2">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="845" y="483" width="290" height="211"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="H93-S2-Ur7">
+                <rect key="frame" x="0.0" y="0.0" width="290" height="211"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+            <point key="canvasLocation" x="495" y="670.5"/>
+        </window>
+        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Sbq-5z-V1y">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="785" y="527" width="361" height="195"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="a7X-U4-USl">
+                <rect key="frame" x="0.0" y="0.0" width="361" height="195"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rrR-mv-HND">
+                        <rect key="frame" x="20" y="82" width="97" height="93"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="settingsIcon" id="AOR-vE-dBS"/>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qjH-6T-aKJ">
+                        <rect key="frame" x="123" y="115" width="179" height="39"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="catchmybus" id="ip5-zh-7Fs">
+                            <font key="font" metaFont="system" size="32"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4C-Zc-dtP">
+                        <rect key="frame" x="123" y="103" width="73" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version 0.1" id="sAo-7c-2oc">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-59-kA7">
+                        <rect key="frame" x="42" y="50" width="179" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Released under MIT License" id="EKv-bD-ID0">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0t-Kq-cow">
+                        <rect key="frame" x="42" y="25" width="260" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Code on GitHub -&gt; kiliankoe/catchmybus" id="HMG-2d-hSE">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="540.5" y="671.5"/>
+        </window>
     </objects>
+    <resources>
+        <image name="settingsIcon" width="256" height="256"/>
+    </resources>
 </document>
