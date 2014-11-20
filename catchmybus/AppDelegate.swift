@@ -42,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	var notificationTime = NSDate()
 	var notificationBlockingstatusItem = false
+	var notification = NSUserNotification()		// hold a reference to the notification so there's only ever one
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -180,6 +181,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		aboutWindow.makeKeyAndOrderFront(sender)
 		NSApp.activateIgnoringOtherApps(true)
 	}
+
+	@IBAction func clearNotificationButtonPressed(sender: NSMenuItem) {
+		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
+	}
 	
 	@IBAction func selectStop(sender: NSMenuItem) {
 		self.cm.selectedStop = sender.title
@@ -203,11 +208,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 //		NSLog("Set a notification for \(sender.connection.toString())")
 		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalDate)
 
+		// clear a possible previous notification
+		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
+
 		// TODO: Send a notification right now stating when the user will be notified
 
 		if showNotifications {
 			// register notification to be sent at time of notification
-			let notification = NSUserNotification()
+			notification = NSUserNotification()
 			notification.title = "Catch your bus!"
 			notification.informativeText = "Your bus is leaving soon."
 			notification.deliveryDate = notificationTime

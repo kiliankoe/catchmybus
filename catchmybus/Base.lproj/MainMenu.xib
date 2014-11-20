@@ -685,6 +685,13 @@
                         <action selector="refreshClicked:" target="Voe-Tx-rLC" id="rFq-Qs-KS5"/>
                     </connections>
                 </menuItem>
+                <menuItem title="Clear notification" id="HGe-b4-rBL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="clearNotificationButtonPressed:" target="Voe-Tx-rLC" id="dvi-V3-4WR"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="8g0-CE-ltm"/>
                 <menuItem title="Settings..." id="iIr-9O-ekF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
