@@ -17,9 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	// Settings window
 	@IBOutlet weak var settingsWindow: NSWindow!
 	@IBOutlet weak var numRowsToShowLabel: NSTextField!
-	@IBOutlet weak var numRowsToShowStepper: NSStepper!
+	@IBOutlet weak var numRowsToShowSlider: NSSlider!
 	@IBOutlet weak var updateTimeLabel: NSTextField!
-	@IBOutlet weak var updateTimeStepper: NSStepper!
+	@IBOutlet weak var updateTimeSlider: NSSlider!
 	@IBOutlet weak var notificationsCheckbox: NSButton!
 
 	// NSMenu
@@ -54,9 +54,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// load NSUserDefaults
 		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey("numRowsToShow")
 		numRowsToShowLabel.integerValue = numRowsToShow
-		numRowsToShowStepper.integerValue = numRowsToShow
+		numRowsToShowSlider.integerValue = numRowsToShow
 		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
 		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
+		updateTimeSlider.integerValue = updateTime
 
 		// setup icons and NSMenuItems
 		setupUI()
@@ -149,12 +150,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	// Settings window
-	@IBAction func numRowsToShowStepperClicked(sender: NSStepper) {
+	@IBAction func numRowsToShowSliderChanged(sender: NSSlider) {
 		numRowsToShowLabel.integerValue = sender.integerValue
 		numRowsToShow = sender.integerValue
 	}
 
-	@IBAction func updateTimeStepperClicked(sender: NSStepper) {
+	@IBAction func updateTimeSliderChanged(sender: NSSlider) {
 		updateTimeLabel.integerValue = sender.integerValue
 		updateTime = sender.integerValue
 	}
