@@ -187,6 +187,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			label.state = NSOffState
 		}
 		sender.state = NSOnState
+
+		// clear a blocking statusitem if it's set
+		notificationBlockingstatusItem = false
+
 		cm.nuke()
 		update()
 	}
