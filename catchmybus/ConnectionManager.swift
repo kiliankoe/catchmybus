@@ -9,6 +9,13 @@
 import Foundation
 import Alamofire
 
+// Easy way of getting a URL fit version of a string from itself
+private extension String {
+	var URLEscapedString: String {
+		return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+	}
+}
+
 class ConnectionManager {
 
 	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße" : 3, "Zellescher Weg" : 8, "Heinrich-Zille-Straße" : 10, "Technische Universität" : 1]
@@ -20,7 +27,7 @@ class ConnectionManager {
 
 	func update(callback: () -> Void) {
 		if let vz = stopDict[selectedStop] {
-			let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(cleanupURLString(selectedStop))&lim=30&vz=\(vz)"
+			let requestURL = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?hst=\(selectedStop.URLEscapedString))&lim=30&vz=\(vz)"
 //			NSLog(requestURL)
 			Alamofire.request(.GET, requestURL)
 				.responseJSON { (_, _, JSON, error) in
@@ -98,22 +105,6 @@ class ConnectionManager {
 		}
 		c.selected = true
 		selectedConnection = c
-	}
-
-	// Don't look at me, this isn't right. Not at all, I know that...
-	// This will be kicked very soon, I've just never touched pretty NSURL awesomness before^^
-	func cleanupURLString(dirty: String) -> String {
-		var string: NSString = dirty
-		string = string.stringByReplacingOccurrencesOfString(" ", withString: "")
-		string = string.stringByReplacingOccurrencesOfString("ä", withString: "ae")
-		string = string.stringByReplacingOccurrencesOfString("ö", withString: "oe")
-		string = string.stringByReplacingOccurrencesOfString("ü", withString: "ue")
-		string = string.stringByReplacingOccurrencesOfString("Ä", withString: "Ae")
-		string = string.stringByReplacingOccurrencesOfString("Ö", withString: "Oe")
-		string = string.stringByReplacingOccurrencesOfString("Ü", withString: "Ue")
-		string = string.stringByReplacingOccurrencesOfString("ß", withString: "ss")
-
-		return string as String
 	}
 
 }
