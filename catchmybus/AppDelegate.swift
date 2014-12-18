@@ -18,8 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBOutlet weak var settingsWindow: NSWindow!
 	@IBOutlet weak var numRowsToShowLabel: NSTextField!
 	@IBOutlet weak var numRowsToShowSlider: NSSlider!
-	@IBOutlet weak var updateTimeLabel: NSTextField!
-	@IBOutlet weak var updateTimeSlider: NSSlider!
 	@IBOutlet weak var notificationsCheckbox: NSButton!
 
 	// NSMenu
@@ -57,7 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numRowsToShowSlider.integerValue = numRowsToShow
 		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
 		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
-		updateTimeSlider.integerValue = updateTime
 
 		// setup icons and NSMenuItems
 		setupUI()
@@ -153,11 +150,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBAction func numRowsToShowSliderChanged(sender: NSSlider) {
 		numRowsToShowLabel.integerValue = sender.integerValue
 		numRowsToShow = sender.integerValue
-	}
-
-	@IBAction func updateTimeSliderChanged(sender: NSSlider) {
-		updateTimeLabel.integerValue = sender.integerValue
-		updateTime = sender.integerValue
 	}
 
 	@IBAction func notificationsCheckboxClicked(sender: NSButton) {

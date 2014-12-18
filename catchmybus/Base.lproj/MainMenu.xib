@@ -21,8 +21,6 @@
                 <outlet property="numRowsToShowSlider" destination="a6b-Vz-qdx" id="LMA-HY-sIe"/>
                 <outlet property="settingsWindow" destination="2uE-3U-UX4" id="JMS-Xf-PH6"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
-                <outlet property="updateTimeLabel" destination="hV1-aZ-NQL" id="KFS-j5-Ld8"/>
-                <outlet property="updateTimeSlider" destination="lNo-R3-DjG" id="hCa-1q-xxK"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -777,14 +775,14 @@
         <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="2uE-3U-UX4">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="689" y="404" width="628" height="324"/>
+            <rect key="contentRect" x="689" y="404" width="628" height="284"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="b7d-8M-WNP">
-                <rect key="frame" x="0.0" y="0.0" width="628" height="324"/>
+                <rect key="frame" x="0.0" y="0.0" width="628" height="284"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3KG-eb-N4M">
-                        <rect key="frame" x="18" y="285" width="26" height="17"/>
+                        <rect key="frame" x="18" y="245" width="26" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="5" id="rbY-Ti-YcX">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -792,66 +790,43 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHX-NI-QUk">
-                        <rect key="frame" x="274" y="285" width="210" height="17"/>
+                        <rect key="frame" x="274" y="245" width="210" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Anzahl angezeigter Verbindungen" id="o8G-6M-CfQ">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hV1-aZ-NQL">
-                        <rect key="frame" x="18" y="250" width="21" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1" id="vYr-KD-4Ia">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgL-bD-DiA">
-                        <rect key="frame" x="274" y="250" width="309" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Minutes until the next update (1 is recommended)" id="wtT-C0-9tb">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6b-Vz-qdx">
-                        <rect key="frame" x="42" y="283" width="188" height="20"/>
+                        <rect key="frame" x="42" y="243" width="188" height="20"/>
                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="20" doubleValue="5" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="vLe-xb-rSr"/>
                         <connections>
                             <action selector="numRowsToShowSliderChanged:" target="Voe-Tx-rLC" id="bS9-oa-4jo"/>
                         </connections>
                     </slider>
-                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNo-R3-DjG">
-                        <rect key="frame" x="42" y="248" width="188" height="20"/>
-                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="15" doubleValue="1" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="gQL-Tc-d1X"/>
-                        <connections>
-                            <action selector="updateTimeSliderChanged:" target="Voe-Tx-rLC" id="2Bu-Yr-pSe"/>
-                        </connections>
-                    </slider>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ra-Ve-pZk">
-                        <rect key="frame" x="14" y="10" width="110" height="32"/>
+                        <rect key="frame" x="14" y="9" width="110" height="32"/>
                         <buttonCell key="cell" type="push" title="Hinzufügen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Sat-O4-PIZ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDl-qr-Ucb">
-                        <rect key="frame" x="124" y="10" width="107" height="32"/>
+                        <rect key="frame" x="124" y="9" width="107" height="32"/>
                         <buttonCell key="cell" type="push" title="Bearbeiten" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bwH-N9-SB2">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fl8-Ct-LRy">
-                        <rect key="frame" x="231" y="10" width="100" height="32"/>
+                        <rect key="frame" x="231" y="9" width="100" height="32"/>
                         <buttonCell key="cell" type="push" title="Entfernen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LcM-WO-Jyu">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7z-lw-jBl">
-                        <rect key="frame" x="20" y="47" width="588" height="183"/>
+                        <rect key="frame" x="20" y="46" width="588" height="183"/>
                         <clipView key="contentView" misplaced="YES" id="WYZ-rN-4dL">
                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -945,7 +920,7 @@
                         </tableHeaderView>
                     </scrollView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFP-of-PaC">
-                        <rect key="frame" x="402" y="19" width="208" height="18"/>
+                        <rect key="frame" x="402" y="18" width="208" height="18"/>
                         <buttonCell key="cell" type="check" title="Benachrichtigungen aktivieren" bezelStyle="regularSquare" imagePosition="left" alignment="center" state="on" inset="2" id="CJx-h8-0fI">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -957,7 +932,7 @@
                 </subviews>
             </view>
             <contentBorderThickness minY="0.0" maxY="0.0"/>
-            <point key="canvasLocation" x="654" y="317"/>
+            <point key="canvasLocation" x="654" y="297"/>
         </window>
     </objects>
     <resources>
