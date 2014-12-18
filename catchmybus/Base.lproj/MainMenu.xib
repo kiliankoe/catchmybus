@@ -704,7 +704,7 @@
                         <action selector="aboutButtonPressed:" target="Voe-Tx-rLC" id="wiZ-8G-Iyn"/>
                     </connections>
                 </menuItem>
-                <menuItem title="catchmybus beenden" id="xM6-rW-caG">
+                <menuItem title="Beenden" id="xM6-rW-caG">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="quitButtonPressed:" target="Voe-Tx-rLC" id="Uak-Ma-KSj"/>

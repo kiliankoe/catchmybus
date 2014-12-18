@@ -40,8 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	var showNotifications = true	// if the app should show notifications or not
 
-	var updateRunning = false
-
 	var notificationTime = NSDate()
 	var notificationBlockingstatusItem = false
 	var notification = NSUserNotification()		// hold a reference to the notification so there's only ever one
@@ -107,12 +105,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	func update() {
-		// more like a dirty quickfix for multiple updates, I'll find a better way to do this...
-		if updateRunning {
-			return
-		}
-		updateRunning = true
-
 		// clear connection rows in menu
 		for i in 0..<numShownRows {
 			self.statusMenu.removeItemAtIndex(0)
@@ -148,7 +140,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 				self.numShownRows++
 				i++
 			}
-			self.updateRunning = false
 		})
 
 		// show new busses in the menubar after a notified connection is through
@@ -226,8 +217,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// clear a possible previous notification
 		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
 
-		let cd = NSDate()
-		if (showNotifications && notificationTime.laterDate(cd) == notificationTime) {
+		let currentDate = NSDate()
+		if (showNotifications && notificationTime.laterDate(currentDate) == notificationTime) {
 			// send a notification right now to tell the user when he's being notified again
 			let tmpnotification = NSUserNotification()
 			tmpnotification.title = "Ist notiert!"
