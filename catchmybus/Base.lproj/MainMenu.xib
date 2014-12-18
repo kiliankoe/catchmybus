@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -679,32 +679,32 @@
             <items>
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
                 <menuItem isSeparatorItem="YES" id="g56-u2-k8W"/>
-                <menuItem title="Manual refresh" id="wVY-tI-kkW">
+                <menuItem title="Manuelles Update" id="wVY-tI-kkW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="refreshClicked:" target="Voe-Tx-rLC" id="rFq-Qs-KS5"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Clear notification" id="HGe-b4-rBL">
+                <menuItem title="Benachrichtigung löschen" id="HGe-b4-rBL">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="clearNotificationButtonPressed:" target="Voe-Tx-rLC" id="dvi-V3-4WR"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="8g0-CE-ltm"/>
-                <menuItem title="Settings..." id="iIr-9O-ekF">
+                <menuItem title="Einstellungen..." id="iIr-9O-ekF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="settingsButtonPressed:" target="Voe-Tx-rLC" id="9Tx-02-8ot"/>
                     </connections>
                 </menuItem>
-                <menuItem title="About..." id="ygB-k9-2Ux">
+                <menuItem title="Über..." id="ygB-k9-2Ux">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="aboutButtonPressed:" target="Voe-Tx-rLC" id="wiZ-8G-Iyn"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit" id="xM6-rW-caG">
+                <menuItem title="catchmybus beenden" id="xM6-rW-caG">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="quitButtonPressed:" target="Voe-Tx-rLC" id="Uak-Ma-KSj"/>
@@ -754,16 +754,16 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-59-kA7">
-                        <rect key="frame" x="42" y="50" width="179" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Released under MIT License" id="EKv-bD-ID0">
+                        <rect key="frame" x="19" y="45" width="219" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Veröffentlicht unter der MIT Lizenz." id="EKv-bD-ID0">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0t-Kq-cow">
-                        <rect key="frame" x="42" y="25" width="260" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Code on GitHub -&gt; kiliankoe/catchmybus" id="HMG-2d-hSE">
+                        <rect key="frame" x="19" y="20" width="322" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GitHub -&gt; https://github.com/kiliankoe/catchmybus" id="HMG-2d-hSE">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -792,8 +792,8 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHX-NI-QUk">
-                        <rect key="frame" x="274" y="285" width="212" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Number of connections to display" id="o8G-6M-CfQ">
+                        <rect key="frame" x="274" y="285" width="210" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Anzahl angezeigter Verbindungen" id="o8G-6M-CfQ">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -830,44 +830,33 @@
                         </connections>
                     </slider>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ra-Ve-pZk">
-                        <rect key="frame" x="14" y="10" width="66" height="32"/>
-                        <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Sat-O4-PIZ">
+                        <rect key="frame" x="14" y="10" width="110" height="32"/>
+                        <buttonCell key="cell" type="push" title="Hinzufügen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Sat-O4-PIZ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDl-qr-Ucb">
-                        <rect key="frame" x="80" y="10" width="65" height="32"/>
-                        <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bwH-N9-SB2">
+                        <rect key="frame" x="124" y="10" width="107" height="32"/>
+                        <buttonCell key="cell" type="push" title="Bearbeiten" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bwH-N9-SB2">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fl8-Ct-LRy">
-                        <rect key="frame" x="145" y="10" width="91" height="32"/>
-                        <buttonCell key="cell" type="push" title="Remove" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LcM-WO-Jyu">
+                        <rect key="frame" x="231" y="10" width="100" height="32"/>
+                        <buttonCell key="cell" type="push" title="Entfernen" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LcM-WO-Jyu">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFP-of-PaC">
-                        <rect key="frame" x="465" y="18" width="145" height="18"/>
-                        <buttonCell key="cell" type="check" title="Enable Notifications" bezelStyle="regularSquare" imagePosition="left" alignment="center" state="on" inset="2" id="CJx-h8-0fI">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="notificationsCheckboxClicked:" target="Voe-Tx-rLC" id="Oer-vs-rpv"/>
-                        </connections>
-                    </button>
                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7z-lw-jBl">
                         <rect key="frame" x="20" y="47" width="588" height="183"/>
-                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="WYZ-rN-4dL">
+                        <clipView key="contentView" misplaced="YES" id="WYZ-rN-4dL">
                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="UMN-il-qSM" viewBased="YES" id="0K2-8Y-s2v">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -946,7 +935,7 @@
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Bc7-Lf-GLV">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Bc7-Lf-GLV">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -955,10 +944,20 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFP-of-PaC">
+                        <rect key="frame" x="402" y="19" width="208" height="18"/>
+                        <buttonCell key="cell" type="check" title="Benachrichtigungen aktivieren" bezelStyle="regularSquare" imagePosition="left" alignment="center" state="on" inset="2" id="CJx-h8-0fI">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="notificationsCheckboxClicked:" target="Voe-Tx-rLC" id="Oer-vs-rpv"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <contentBorderThickness minY="0.0" maxY="0.0"/>
-            <point key="canvasLocation" x="622" y="323"/>
+            <point key="canvasLocation" x="654" y="317"/>
         </window>
     </objects>
     <resources>

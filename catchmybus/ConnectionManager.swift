@@ -18,7 +18,7 @@ private extension String {
 
 class ConnectionManager {
 
-	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße" : 3, "Zellescher Weg" : 8, "Heinrich-Zille-Straße" : 10, "Technische Universität" : 1]
+	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße" : 1, "Zellescher Weg" : 5, "Heinrich-Zille-Straße" : 8, "Technische Universität" : 1]
 	var selectedStop = "Helmholtzstraße"
 
 	var connections = [Connection]()

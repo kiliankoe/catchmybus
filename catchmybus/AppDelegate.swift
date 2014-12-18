@@ -230,25 +230,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		if (showNotifications && notificationTime.laterDate(cd) == notificationTime) {
 			// send a notification right now to tell the user when he's being notified again
 			let tmpnotification = NSUserNotification()
-			tmpnotification.title = "Got it!"
+			tmpnotification.title = "Ist notiert!"
 			// NSDate.dateWithCalendarFormat is actually deprecated as of OS X 10.10
 			// TODO: use .descriptionWithLocale instead
 			let dateformat = "%H:%M"
 			let timezone = NSTimeZone(abbreviation: "CEST")
-			tmpnotification.informativeText = "You'll receive a notification at \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone))."
+			tmpnotification.informativeText = "Du bekommst eine Benachrichtigung um \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone)) Uhr. 15 Minuten vor Abfahrt."
 			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(tmpnotification)
 
 			// register notification to be sent at time of notification
 			notification = NSUserNotification()
 			if (sender.connection.line.toInt() > 20) {
 				// it's a bus!
-				notification.title = "Catch your bus!"
+				notification.title = "Dein Bus kommt!"
 				// TODO: Replace \(15) with the notification time set for a single stop. This obviously isn't happening yet^^
-				notification.informativeText = "Your bus \(sender.connection.line) \(sender.connection.direction) is arriving at \(cm.selectedStop) in \(15) minutes."
+				notification.informativeText = "Deine Buslinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in 15 Minuten an der Haltestelle \(cm.selectedStop)."
 			} else {
 				// it's a tram!
-				notification.title = "Catch your tram!"
-				notification.informativeText = "Your tram \(sender.connection.line) \(sender.connection.direction) is arriving at \(cm.selectedStop) in \(15) minutes."
+				notification.title = "Deine Bahn kommt!"
+				notification.informativeText = "Deine Bahnlinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in 15 Minuten an der Haltestelle \(cm.selectedStop)."
 			}
 			notification.deliveryDate = notificationTime
 			NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
