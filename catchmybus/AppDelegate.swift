@@ -9,7 +9,6 @@
 //  The term 'Bus' is used for both busses and trams in this app
 
 import Cocoa
-import Alamofire
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
