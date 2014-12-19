@@ -217,7 +217,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			// TODO: use .descriptionWithLocale instead
 			let dateformat = "%H:%M"
 			let timezone = NSTimeZone(abbreviation: "CEST")
-			tmpnotification.informativeText = "Du bekommst eine Benachrichtigung um \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone)) Uhr. 15 Minuten vor Abfahrt."
+			tmpnotification.informativeText = "Du bekommst um \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone)) Uhr eine Benachrichtigung. 15 Minuten vor Abfahrt."
 			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(tmpnotification)
 
 			// register notification to be sent at time of notification
