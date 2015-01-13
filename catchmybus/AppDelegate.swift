@@ -110,30 +110,46 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numShownRows = 0
 		cm.update({
 			if self.notificationBlockingStatusItem {
-				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)" // Waiting for Notification
-				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)" // this has to wait for the new connection management
+				// A connection is selected, so that is displayed in the menubar
+				// updated twice on purpose to clear the necessary space
+				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)"
+				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)"
 			} else {
-				// update the statusMenu.title
-				// done twice on purpose to clear the necessary space
-				if let firstBusArrivalMinutes = self.cm.connections.first?.arrivalMinutes {
+				var firstBusArrivalMinutes = 0
+				// no connection is selected, so the next connection is displayed in the menubar
+				if let pretime = self.cm.stopDict[self.cm.selectedStop] {
+					for connection in self.cm.connections {
+						if (connection.arrivalMinutes >= pretime) {
+							// get the first bus with an arrivaltime after the pretime
+							firstBusArrivalMinutes = connection.arrivalMinutes
+							break
+						}
+					}
+					// update the statusMenu.title
+					// updated twice on purpose to clear the necessary space
 					self.statusItem.title = "\(firstBusArrivalMinutes)"
 					self.statusItem.title = "\(firstBusArrivalMinutes)"
 				}
 			}
 
 			// loop through connections to update NSMenuItems
-			var i = 0
-			for connection in self.cm.connections {
-				if (i == self.numRowsToShow) {
-					break
+			if let pretime = self.cm.stopDict[self.cm.selectedStop] {
+				var i = 0
+				for connection in self.cm.connections {
+					if (connection.arrivalMinutes >= pretime) {
+						// stop adding rows if enough are already displayed
+						if (i == self.numRowsToShow) {
+							break
+						}
+						let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
+						if connection.selected {
+							connectionMenuItem.state = NSOnState
+						}
+						self.statusMenu.insertItem(connectionMenuItem, atIndex: i)
+						self.numShownRows++
+						i++
+					}
 				}
-				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
-				if connection.selected {
-					connectionMenuItem.state = NSOnState
-				}
-				self.statusMenu.insertItem(connectionMenuItem, atIndex: i)
-				self.numShownRows++
-				i++
 			}
 		})
 

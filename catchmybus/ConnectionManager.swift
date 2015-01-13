@@ -10,6 +10,8 @@ import Foundation
 
 class ConnectionManager {
 
+	// TODO: Add an init method that loads stuff from NSUserDefaults
+
 	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
 	var selectedStop = "Helmholtzstraße"
 
