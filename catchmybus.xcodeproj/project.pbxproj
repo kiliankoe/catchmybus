@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		395C30001A656AD100769476 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C2FFF1A656AD100769476 /* ConnectionManager.swift */; };
 		3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397278991A1800140051C208 /* ConnectionMenuItem.swift */; };
 		39A5AE431A160A6A0044396A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5AE421A160A6A0044396A /* Connection.swift */; };
-		39A5AE461A160DBA0044396A /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5AE451A160DBA0044396A /* ConnectionManager.swift */; };
 		39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */; };
 		39F3063D1A11B0D500CEAE43 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F3063C1A11B0D500CEAE43 /* Images.xcassets */; };
 		39F306401A11B0D500CEAE43 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F3063E1A11B0D500CEAE43 /* MainMenu.xib */; };
@@ -41,9 +41,9 @@
 
 /* Begin PBXFileReference section */
 		39432B0F1A1A930C00190A42 /* catchmybus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = catchmybus.entitlements; sourceTree = "<group>"; };
+		395C2FFF1A656AD100769476 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		397278991A1800140051C208 /* ConnectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMenuItem.swift; sourceTree = "<group>"; };
 		39A5AE421A160A6A0044396A /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		39A5AE451A160DBA0044396A /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		39F306351A11B0D500CEAE43 /* catchmybus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = catchmybus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F306391A11B0D500CEAE43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 				39432B0F1A1A930C00190A42 /* catchmybus.entitlements */,
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
 				39A5AE421A160A6A0044396A /* Connection.swift */,
-				39A5AE451A160DBA0044396A /* ConnectionManager.swift */,
+				395C2FFF1A656AD100769476 /* ConnectionManager.swift */,
 				397278991A1800140051C208 /* ConnectionMenuItem.swift */,
 				39F3063C1A11B0D500CEAE43 /* Images.xcassets */,
 				39F3063E1A11B0D500CEAE43 /* MainMenu.xib */,
@@ -235,8 +235,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				395C30001A656AD100769476 /* ConnectionManager.swift in Sources */,
 				39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */,
-				39A5AE461A160DBA0044396A /* ConnectionManager.swift in Sources */,
 				39A5AE431A160A6A0044396A /* Connection.swift in Sources */,
 				3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */,
 			);

@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	var showNotifications = true	// if the app should show notifications or not
 
 	var notificationTime = NSDate()
-	var notificationBlockingstatusItem = false
+	var notificationBlockingStatusItem = false
 	var notification = NSUserNotification()		// hold a reference to the notification so there's only ever one
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
@@ -108,9 +108,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		// pull new data and update UI in callback
 		numShownRows = 0
-		cm.clear()
 		cm.update({
-			if self.notificationBlockingstatusItem {
+			if self.notificationBlockingStatusItem {
 				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)" // Waiting for Notification
 				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)" // this has to wait for the new connection management
 			} else {
@@ -141,7 +140,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// show new busses in the menubar after a notified connection is through
 		let currentTime = NSDate()
 		if (currentTime.laterDate(notificationTime.dateByAddingTimeInterval(NSTimeInterval(15 * 60))) == currentTime) {
-			notificationBlockingstatusItem = false
+			notificationBlockingStatusItem = false
 		}
 	}
 
@@ -179,7 +178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		for c in cm.connections {
 			c.selected = false
 		}
-		notificationBlockingstatusItem = false
+		notificationBlockingStatusItem = false
 		update()
 	}
 	
@@ -191,7 +190,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		sender.state = NSOnState
 
 		// clear a blocking statusitem if it's set
-		notificationBlockingstatusItem = false
+		notificationBlockingStatusItem = false
 
 		cm.nuke()
 		update()
@@ -236,7 +235,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
 		}
 
-		notificationBlockingstatusItem = true
+		notificationBlockingStatusItem = true
 
 		cm.selectConnection(sender.connection)
 		sender.connection.selected = true

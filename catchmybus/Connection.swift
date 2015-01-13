@@ -24,8 +24,8 @@ class Connection {
 		self.arrivalDate = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * arrivalMinutes))
 	}
 
-	func update(cd: NSDate) {
-		arrivalMinutes = Int(arrivalDate.timeIntervalSinceDate(cd)) / 60
+	func update() {
+		arrivalMinutes = Int(arrivalDate.timeIntervalSinceNow) / 60
 	}
 
 	func toString() -> String {
