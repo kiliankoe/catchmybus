@@ -3,7 +3,7 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "1415734976_ic_directions_bus_48px-16.png",
+      "filename" : "icon_16x16.png",
       "scale" : "1x"
     },
     {
@@ -14,18 +14,19 @@
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "1415734972_ic_directions_bus_48px-32.png",
+      "filename" : "icon_32x32.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "32x32",
+      "idiom" : "mac",
+      "filename" : "icon_32x32@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "1415768263_ic_directions_bus_48px-128.png",
+      "filename" : "icon_128x128.png",
       "scale" : "1x"
     },
     {
@@ -36,7 +37,7 @@
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "1415768261_ic_directions_bus_48px-256.png",
+      "filename" : "icon_256x256.png",
       "scale" : "1x"
     },
     {
@@ -47,12 +48,13 @@
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "1415743932_ic_directions_bus_48px-512.png",
+      "filename" : "icon_512x512.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "icon_512x512@2x.png",
       "scale" : "2x"
     }
   ],
