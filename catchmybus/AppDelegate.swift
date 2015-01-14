@@ -45,7 +45,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// initialize default NSUserDefaults
-		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : cm.stopDict, "updateTime" : 1]
+		let defaultStopDict = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
+		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : defaultStopDict, "selectedStop": "Helmholtzstraße", "updateTime" : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// load NSUserDefaults
@@ -53,6 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numRowsToShowLabel.integerValue = numRowsToShow
 		numRowsToShowSlider.integerValue = numRowsToShow
 		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
+		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey("selectedStop") as String
 		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
 
 		// setup icons and NSMenuItems
@@ -71,6 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
 		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
+		NSUserDefaults.standardUserDefaults().setObject(cm.selectedStop, forKey: "selectedStop")
 		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: "updateTime")
 	}
 
@@ -88,12 +91,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			let stopMenuItem = NSMenuItem(title: stop.0, action: Selector("selectStop:"), keyEquivalent: "")
 			stopLabels.append(stopMenuItem)
 			statusMenu.insertItem(stopMenuItem, atIndex: 1)
-		}
-		// By default 'Helmholtzstraße' would be selected, even if the user does not
-		// have this stop in their list. Select the first of the user's stops on startup.
-		if let firstStop = stopLabels.first {
-			cm.selectedStop = firstStop.title
-			firstStop.state = NSOnState
+			if (stop.0 == cm.selectedStop) {
+				stopMenuItem.state = NSOnState
+			}
 		}
 
 		statusItem.image = icon
