@@ -100,6 +100,34 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		statusItem.menu = statusMenu
 	}
 
+	func updateUI() {
+		// clear connection rows in menu, fuck DRY
+		for i in 0..<numShownRows {
+			self.statusMenu.removeItemAtIndex(0)
+		}
+
+		numShownRows = 0
+
+		// is there any status item to be done here? I think not... Let's see
+
+		if let pretime = cm.stopDict[cm.selectedStop] {
+			var i = 0
+			for connection in cm.connections {
+				// stop adding rows if enough are already displayed
+				if (i == self.numRowsToShow) {
+					break
+				}
+				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
+				if connection.selected {
+					connectionMenuItem.state = NSOnState
+				}
+				statusMenu.insertItem(connectionMenuItem, atIndex: i)
+				numShownRows++
+				i++
+			}
+		}
+	}
+
 	func update() {
 		// clear connection rows in menu
 		for i in 0..<numShownRows {
@@ -164,6 +192,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBAction func numRowsToShowSliderChanged(sender: NSSlider) {
 		numRowsToShowLabel.integerValue = sender.integerValue
 		numRowsToShow = sender.integerValue
+		updateUI()
 	}
 
 	@IBAction func notificationsCheckboxClicked(sender: NSButton) {
