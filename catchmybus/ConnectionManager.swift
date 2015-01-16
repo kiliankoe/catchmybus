@@ -13,6 +13,8 @@ class ConnectionManager {
 	// TODO: Add an init method that loads stuff from NSUserDefaults
 
 	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
+	// I hate this... for the sake of NSUserDefaults being crappy
+	var notificationDict: Dictionary<String, Int> = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
 	var selectedStop = "Helmholtzstraße"
 
 	func updateStopDict(newStopDict: Dictionary<String, Int>) {

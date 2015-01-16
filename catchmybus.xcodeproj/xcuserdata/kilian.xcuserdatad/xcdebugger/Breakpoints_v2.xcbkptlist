@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "catchmybus/ConnectionManager.swift"
-            timestampString = "442924598.849348"
+            timestampString = "443128712.987547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "update(_:)"
             landmarkType = "5">
          </BreakpointContent>

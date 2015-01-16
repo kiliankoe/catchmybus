@@ -46,7 +46,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// initialize default NSUserDefaults
 		let defaultStopDict = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
-		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : defaultStopDict, "selectedStop": "Helmholtzstraße", "updateTime" : 1]
+		let defaultNotificationDict = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
+		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : defaultStopDict, "notificationDict": defaultNotificationDict, "selectedStop": "Helmholtzstraße", "updateTime" : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// load NSUserDefaults
@@ -54,6 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numRowsToShowLabel.integerValue = numRowsToShow
 		numRowsToShowSlider.integerValue = numRowsToShow
 		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
+		cm.notificationDict = NSUserDefaults.standardUserDefaults().objectForKey("notificationDict") as Dictionary
 		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey("selectedStop") as String
 		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
 
@@ -73,6 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
 		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
+		NSUserDefaults.standardUserDefaults().setObject(cm.notificationDict, forKey: "notificationDict")
 		NSUserDefaults.standardUserDefaults().setObject(cm.selectedStop, forKey: "selectedStop")
 		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: "updateTime")
 	}
@@ -247,7 +250,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	func connectionSelected(sender: ConnectionMenuItem) {
 //		NSLog("Set a notification for \(sender.connection.toString())")
-		notificationTime = NSDate(timeInterval: NSTimeInterval(-15 * 60), sinceDate: sender.connection.arrivalDate)
+		notificationTime = NSDate(timeInterval: NSTimeInterval(-(cm.notificationDict[cm.selectedStop]!) * 60), sinceDate: sender.connection.arrivalDate)
 
 		// clear a possible previous notification
 		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
@@ -261,7 +264,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			// TODO: use .descriptionWithLocale instead
 			let dateformat = "%H:%M"
 			let timezone = NSTimeZone(abbreviation: "CEST")
-			tmpnotification.informativeText = "Du bekommst um \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone)) Uhr eine Benachrichtigung. 15 Minuten vor Abfahrt."
+			tmpnotification.informativeText = "Du bekommst um \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone)) Uhr eine Benachrichtigung. \(cm.notificationDict[cm.selectedStop]!) Minuten vor Abfahrt."
 			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(tmpnotification)
 
 			// register notification to be sent at time of notification
@@ -270,11 +273,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 				// it's a bus!
 				notification.title = "Dein Bus kommt!"
 				// TODO: Replace \(15) with the notification time set for a single stop. This obviously isn't happening yet^^
-				notification.informativeText = "Deine Buslinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in 15 Minuten an der Haltestelle \(cm.selectedStop)."
+				notification.informativeText = "Deine Buslinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in \(cm.notificationDict[cm.selectedStop]!) Minuten an der Haltestelle \(cm.selectedStop)."
 			} else {
 				// it's a tram!
 				notification.title = "Deine Bahn kommt!"
-				notification.informativeText = "Deine Bahnlinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in 15 Minuten an der Haltestelle \(cm.selectedStop)."
+				notification.informativeText = "Deine Bahnlinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in \(cm.notificationDict[cm.selectedStop]!) Minuten an der Haltestelle \(cm.selectedStop)."
 			}
 			notification.deliveryDate = notificationTime
 			NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
