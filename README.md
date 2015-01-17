@@ -9,17 +9,18 @@ Runs on OS X 10.9 Mavericks and 10.10 Yosemite.
 
 ## Download
 
-Check the [releases](https://github.com/kiliankoe/catchmybus/releases) page for downloading the most current version.
+Click [here](https://github.com/kiliankoe/catchmybus/releases/latest) for the latest release.
 
-## Screenshots
+## Screenshot
 
-![screenshot](./screenshot1.png)
-![screenshot](./screenshot2.png)
+![screenshot](./screenshot.png)
 
 ## Compiling
 
-You'll need a Mac running OS X 10.10 Yosemite as it's unfortunately not possible to build Swift apps on anything below. You'll still be able to run the app on Mavericks though. Check the [releases](https://github.com/kiliankoe/catchmybus/releases) page.
+You'll need a Mac running OS X 10.10 Yosemite as it's unfortunately not possible to build Swift apps on anything below. You'll still be able to run the app on Mavericks though. Download the [latest release](https://github.com/kiliankoe/catchmybus/releases/latest) if you want to run it on 10.9 Mavericks.
 
 ## Credits
 
 Name and idea shamelessly stolen from [hoodie/catch-my-bus](https://github.com/hoodie/catch-my-bus).
+
+There's a very similar version to catchmybus built with Python and GTK if you're looking for something that will run on other systems. Check that out here: [devmeepo/catch-my-bus-python](https://github.com/devmeepo/catch-my-bus-python).
