@@ -54,9 +54,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey("numRowsToShow")
 		numRowsToShowLabel.integerValue = numRowsToShow
 		numRowsToShowSlider.integerValue = numRowsToShow
-		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as Dictionary
-		cm.notificationDict = NSUserDefaults.standardUserDefaults().objectForKey("notificationDict") as Dictionary
-		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey("selectedStop") as String
+		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as! Dictionary
+		cm.notificationDict = NSUserDefaults.standardUserDefaults().objectForKey("notificationDict") as! Dictionary
+		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey("selectedStop") as! String
 		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
 
 		// setup icons and NSMenuItems

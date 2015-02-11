@@ -58,13 +58,13 @@ class ConnectionManager {
 					if (connectionList.count > 0) {
 						for connectionItem in connectionList {
 							// transfer a single connection's array into its components
-							let line = connectionItem[0] as String
-							let direction = connectionItem[1] as String
+							let line = connectionItem[0] as! String
+							let direction = connectionItem[1] as! String
 							var arrivalMinutes: Int
-							if (connectionItem[2] as String == "") {
+							if (connectionItem[2] as! String == "") {
 								arrivalMinutes = 0
 							} else {
-								let arrivalMinutesString = connectionItem[2] as String
+								let arrivalMinutesString = connectionItem[2] as! String
 								arrivalMinutes = arrivalMinutesString.toInt()!
 							}
 							let newConnection = Connection(line: line, direction: direction, arrivalMinutes: arrivalMinutes)
@@ -116,14 +116,14 @@ class ConnectionManager {
 			var part = NSString(format: "%@=%@",
 				name.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!,
 				value.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
-			parts.append(part)
+			parts.append(part as! String)
 		}
 		return "&".join(parts)
 	}
 
 	func NSURLByAppendingQueryParameters(URL: NSURL!, queryParameters: Dictionary<String, String>) -> NSURL {
 		let URLString: NSString = NSString(format: "%@?%@", URL.absoluteString!, self.stringFromQueryParameters(queryParameters))
-		return NSURL(string: URLString)!
+		return NSURL(string: URLString as! String)!
 	}
 
 }
