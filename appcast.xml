@@ -12,8 +12,8 @@
                     <p>Autoupdates \o/</p>
                 ]]>
             </description>
-            <pubDate>Mon, 04 May 2015 23:00:00 +0000</pubDate>
-            <enclosure url="https://github.com/kiliankoe/catchmybus/releases/download/v0.2.1/catchmybus.app.zip" sparkle:version="2" sparkle:shortVersionString="0.2.1" sparkle:dsaSignature="" length="1618975" type="application/octet-stream" />
+            <pubDate>Mon, 04 May 2015 20:35:00 +0000</pubDate>
+            <enclosure url="https://github.com/kiliankoe/catchmybus/releases/download/v0.2.1/catchmybus.app.zip" sparkle:version="2" sparkle:shortVersionString="0.2.1" sparkle:dsaSignature="MC4CFQDFRm5UuKzwo6yOW9UJm2FV7aWBAwIVANghudUK4NHTqVYcp4ypRbMNOPEb" length="2636377" type="application/octet-stream" />
             <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
         </item>
     </channel>
