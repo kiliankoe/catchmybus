@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>catchmybus changelog</title>
+        <link>http://catchmybus.kilian.io/appcast.xml</link>
+        <description>Most recent changes with links to updates.</description>
+        <language>en</language>
+        <item>
+            <title>Version 0.2.1</title>
+            <description>
+                <![CDATA[
+                    <p>Autoupdates \o/</p>
+                ]]>
+            </description>
+            <pubDate>Mon, 04 May 2015 23:00:00 +0000</pubDate>
+            <enclosure url="https://github.com/kiliankoe/catchmybus/releases/download/v0.2.1/catchmybus.app.zip" sparkle:version="2" sparkle:shortVersionString="0.2.1" sparkle:dsaSignature="" length="1618975" type="application/octet-stream" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+    </channel>
+</rss>
