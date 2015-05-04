@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3500788DED964CC8E95C8859 /* Pods_catchmybus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A7C3BE161D884E94D8D645 /* Pods_catchmybus.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3936DE401AF7E2FE005E2FB1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */; };
 		395C30001A656AD100769476 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C2FFF1A656AD100769476 /* ConnectionManager.swift */; };
 		3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397278991A1800140051C208 /* ConnectionMenuItem.swift */; };
 		39A5AE431A160A6A0044396A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5AE421A160A6A0044396A /* Connection.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-catchmybus.release.xcconfig"; path = "Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus.release.xcconfig"; sourceTree = "<group>"; };
+		3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../dsa_pub.pem; sourceTree = "<group>"; };
 		39432B0F1A1A930C00190A42 /* catchmybus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = catchmybus.entitlements; sourceTree = "<group>"; };
 		395C2FFF1A656AD100769476 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		397278991A1800140051C208 /* ConnectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMenuItem.swift; sourceTree = "<group>"; };
@@ -52,6 +56,8 @@
 		39F306451A11B0D500CEAE43 /* catchmybusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = catchmybusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F3064A1A11B0D500CEAE43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39F3064B1A11B0D500CEAE43 /* catchmybusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catchmybusTests.swift; sourceTree = "<group>"; };
+		54A7C3BE161D884E94D8D645 /* Pods_catchmybus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_catchmybus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41E470E9735676ED10B492A /* Pods-catchmybus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-catchmybus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3500788DED964CC8E95C8859 /* Pods_catchmybus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +79,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35A0762D54645E598D9494D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F41E470E9735676ED10B492A /* Pods-catchmybus.debug.xcconfig */,
+				37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		39F3062C1A11B0D500CEAE43 = {
 			isa = PBXGroup;
 			children = (
 				39F306371A11B0D500CEAE43 /* catchmybus */,
 				39F306481A11B0D500CEAE43 /* catchmybusTests */,
 				39F306361A11B0D500CEAE43 /* Products */,
+				35A0762D54645E598D9494D6 /* Pods */,
+				526C9F337D0BEA297946ECCC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +126,7 @@
 		39F306381A11B0D500CEAE43 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */,
 				39F306391A11B0D500CEAE43 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -130,6 +149,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		526C9F337D0BEA297946ECCC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54A7C3BE161D884E94D8D645 /* Pods_catchmybus.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,10 +164,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39F3064F1A11B0D500CEAE43 /* Build configuration list for PBXNativeTarget "catchmybus" */;
 			buildPhases = (
+				314D721CA7E6C656D8BC1D6E /* Check Pods Manifest.lock */,
 				39F306311A11B0D500CEAE43 /* Sources */,
 				39F306321A11B0D500CEAE43 /* Frameworks */,
 				39F306331A11B0D500CEAE43 /* Resources */,
 				3923C62F1A1273EC00E8BA7E /* Copy Frameworks */,
+				0C0881EC93CD934DCDCF8060 /* Copy Pods Resources */,
+				39DD2B1D1AF7D6EF0026CD51 /* ShellScript */,
+				4FF79AD97FDB6853112B3347 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -180,6 +211,7 @@
 				TargetAttributes = {
 					39F306341A11B0D500CEAE43 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = HU85FER47E;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -217,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39F3063D1A11B0D500CEAE43 /* Images.xcassets in Resources */,
+				3936DE401AF7E2FE005E2FB1 /* dsa_pub.pem in Resources */,
 				39F306401A11B0D500CEAE43 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +262,67 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C0881EC93CD934DCDCF8060 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		314D721CA7E6C656D8BC1D6E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		39DD2B1D1AF7D6EF0026CD51 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\n\n# Usually set by Xcode\nCODE_SIGN_IDENTITY=\"Kilian Koeltzsch\"\n\ncodesign --verbose --force --sign \"$CODE_SIGN_IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
+		};
+		4FF79AD97FDB6853112B3347 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		39F306311A11B0D500CEAE43 /* Sources */ = {
@@ -351,6 +445,7 @@
 		};
 		39F306501A11B0D500CEAE43 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F41E470E9735676ED10B492A /* Pods-catchmybus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = catchmybus/catchmybus.entitlements;
@@ -359,11 +454,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
 		39F306511A11B0D500CEAE43 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = catchmybus/catchmybus.entitlements;
@@ -372,6 +469,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

@@ -5,28 +5,24 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BBF280D2-8D84-4FF4-9B0F-9560AAF23134</string>
+	<string>D68F2BEC-F63A-4A01-B600-4C75C1AE684A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>catchmybus</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>github.com:Alamofire/Alamofire.git</string>
 		<key>7BCDC6582A5AB53449720B4AEE2FF9BB911EE594</key>
 		<string>github.com:perfaram/PFAboutWindow.git</string>
 		<key>B1609CE227DE13CB2F33E19BC2D3C67C8A272665</key>
 		<string>github.com:kiliankoe/catchmybus.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>catchmybus.xcodeproj</string>
+	<string>catchmybus.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>../..Alamofire</string>
 		<key>7BCDC6582A5AB53449720B4AEE2FF9BB911EE594</key>
-		<string>../../catchmybus/PFAboutWindow</string>
+		<string>..catchmybus/PFAboutWindow</string>
 		<key>B1609CE227DE13CB2F33E19BC2D3C67C8A272665</key>
-		<string>../..</string>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:kiliankoe/catchmybus.git</string>
@@ -43,14 +39,6 @@
 			<string>B1609CE227DE13CB2F33E19BC2D3C67C8A272665</string>
 			<key>IDESourceControlWCCName</key>
 			<string>catchmybus</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>67620B5EFA902936DF04070AF595B76AB0333747</string>
-			<key>IDESourceControlWCCName</key>
-			<string>catchmybusAlamofire</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
