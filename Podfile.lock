@@ -1,10 +1,25 @@
 PODS:
+  - IYLoginItem (0.1)
+  - PFAboutWindow (1.0.0)
   - Sparkle (1.9.0)
 
 DEPENDENCIES:
+  - IYLoginItem (~> 0.1)
+  - PFAboutWindow (from `https://github.com/perfaram/PFAboutWindow.git`)
   - Sparkle (~> 1.9)
 
+EXTERNAL SOURCES:
+  PFAboutWindow:
+    :git: https://github.com/perfaram/PFAboutWindow.git
+
+CHECKOUT OPTIONS:
+  PFAboutWindow:
+    :commit: dbd1febe06aae6f4c963ba81eafc07af167f5183
+    :git: https://github.com/perfaram/PFAboutWindow.git
+
 SPEC CHECKSUMS:
+  IYLoginItem: e57a86b39d3b9ab0e2fc033adedae01efafd9adf
+  PFAboutWindow: f9d738d4921c4e669b79bf54bf05332e7553c9ad
   Sparkle: 75bbbc5ab2d666f7f77c241afe7fd28364a8f9f7
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.37.0

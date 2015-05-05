@@ -5,6 +5,8 @@ use_frameworks!
 
 target 'catchmybus' do
 	pod 'Sparkle', '~> 1.9'	
+	pod 'IYLoginItem', '~> 0.1'
+	pod 'PFAboutWindow', :git => 'https://github.com/perfaram/PFAboutWindow.git'
 end
 
 target 'catchmybusTests' do
