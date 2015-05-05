@@ -10,6 +10,7 @@
 
 import Cocoa
 import IYLoginItem
+import PFAboutWindow
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
@@ -20,13 +21,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBOutlet weak var numRowsToShowSlider: NSSlider!
 	@IBOutlet weak var notificationsCheckbox: NSButton!
 
+	// About window
+	let aboutWindowController = PFAboutWindowController()
+
 	// NSMenu
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
 	@IBOutlet weak var startAtLoginMenuItem: NSMenuItem!
-
-	// About window
-	@IBOutlet weak var aboutWindow: NSWindow!
 
 	var stopLabels: [NSMenuItem] = []
 
@@ -71,6 +72,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		// Update data and UI
 		update()
+
+		// Fill about window with info
+		aboutWindowController.appName = "catchmybus"
+		aboutWindowController.appURL = NSURL(string: "http://catchmybus.kilian.io")
+		aboutWindowController.appCopyright = NSAttributedString(string: "Copyright (c) 2015 Kilian Koeltzsch")
+		aboutWindowController.appEULA = NSAttributedString(string: "The MIT License (MIT)\n\nCopyright (c) 2015 Kilian Koeltzsch\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.")
+		aboutWindowController.appCredits = NSAttributedString(string: "Thanks for help and tipps @h4llow3En")
+
 
 		// initialize timer to automatically call update() how ever often updateTime states
 		let timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
@@ -234,7 +243,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	@IBAction func aboutButtonPressed(sender: NSMenuItem) {
-		aboutWindow.makeKeyAndOrderFront(sender)
+//		aboutWindow.makeKeyAndOrderFront(sender)
+		aboutWindowController.showWindow(nil)
 		NSApp.activateIgnoringOtherApps(true)
 	}
 
