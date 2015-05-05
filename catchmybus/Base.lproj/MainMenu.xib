@@ -20,6 +20,7 @@
                 <outlet property="numRowsToShowLabel" destination="3KG-eb-N4M" id="HLn-Q3-P7r"/>
                 <outlet property="numRowsToShowSlider" destination="a6b-Vz-qdx" id="LMA-HY-sIe"/>
                 <outlet property="settingsWindow" destination="2uE-3U-UX4" id="JMS-Xf-PH6"/>
+                <outlet property="startAtLoginMenuItem" destination="lcr-qF-FZU" id="Yo7-6e-Uaf"/>
                 <outlet property="statusMenu" destination="KpV-aS-2O2" id="BiV-as-DqO"/>
             </connections>
         </customObject>
@@ -695,6 +696,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="settingsButtonPressed:" target="Voe-Tx-rLC" id="9Tx-02-8ot"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Start catchmybus at Login" id="lcr-qF-FZU">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="startAtLoginButtonPressed:" target="Voe-Tx-rLC" id="O9D-am-Oe7"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Check for updates..." id="FnE-W5-HI6">

@@ -9,6 +9,7 @@
 //  The term 'Bus' is used for both busses and trams in this app
 
 import Cocoa
+import IYLoginItem
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	// NSMenu
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
+	@IBOutlet weak var startAtLoginMenuItem: NSMenuItem!
 
 	// About window
 	@IBOutlet weak var aboutWindow: NSWindow!
@@ -61,6 +63,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		// setup icons and NSMenuItems
 		setupUI()
+
+		// Set state for startAtLoginMenuItem
+		if NSBundle.mainBundle().isLoginItem() {
+			startAtLoginMenuItem.state = NSOnState
+		}
 
 		// Update data and UI
 		update()
@@ -214,6 +221,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
 		settingsWindow.makeKeyAndOrderFront(sender)
 		NSApp.activateIgnoringOtherApps(true)
+	}
+
+	@IBAction func startAtLoginButtonPressed(sender: NSMenuItem) {
+		if sender.state == NSOnState {
+			NSBundle.mainBundle().removeFromLoginItems()
+			sender.state = NSOffState
+		} else {
+			NSBundle.mainBundle().addToLoginItems()
+			sender.state = NSOnState
+		}
 	}
 
 	@IBAction func aboutButtonPressed(sender: NSMenuItem) {
