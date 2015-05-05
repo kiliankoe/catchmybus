@@ -679,26 +679,26 @@
             <items>
                 <menuItem isSeparatorItem="YES" id="pYe-sl-3ie"/>
                 <menuItem isSeparatorItem="YES" id="g56-u2-k8W"/>
-                <menuItem title="Manuelles Update" id="wVY-tI-kkW">
+                <menuItem title="Manual update" id="wVY-tI-kkW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="refreshClicked:" target="Voe-Tx-rLC" id="rFq-Qs-KS5"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Benachrichtigung löschen" id="HGe-b4-rBL">
+                <menuItem title="Remove notification" id="HGe-b4-rBL">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="clearNotificationButtonPressed:" target="Voe-Tx-rLC" id="dvi-V3-4WR"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="8g0-CE-ltm"/>
-                <menuItem title="Einstellungen..." id="iIr-9O-ekF">
+                <menuItem title="Stop settings..." id="iIr-9O-ekF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="settingsButtonPressed:" target="Voe-Tx-rLC" id="9Tx-02-8ot"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Start catchmybus at Login" id="lcr-qF-FZU">
+                <menuItem title="Start catchmybus at login" id="lcr-qF-FZU">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="startAtLoginButtonPressed:" target="Voe-Tx-rLC" id="O9D-am-Oe7"/>
@@ -710,13 +710,13 @@
                         <action selector="checkForUpdates:" target="hNF-vA-BGY" id="A0r-Ul-g7E"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Über..." id="ygB-k9-2Ux">
+                <menuItem title="About..." id="ygB-k9-2Ux">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="aboutButtonPressed:" target="Voe-Tx-rLC" id="wiZ-8G-Iyn"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Beenden" id="xM6-rW-caG">
+                <menuItem title="Quit" id="xM6-rW-caG">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="quitButtonPressed:" target="Voe-Tx-rLC" id="Uak-Ma-KSj"/>
@@ -784,7 +784,7 @@
                 </subviews>
             </view>
             <contentBorderThickness minY="0.0" maxY="0.0"/>
-            <point key="canvasLocation" x="540.5" y="671.5"/>
+            <point key="canvasLocation" x="918.5" y="693.5"/>
         </window>
         <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="2uE-3U-UX4">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" texturedBackground="YES"/>
