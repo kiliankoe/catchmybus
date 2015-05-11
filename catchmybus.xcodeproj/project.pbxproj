@@ -136,6 +136,14 @@
 			name = "Settings Window";
 			sourceTree = "<group>";
 		};
+		392024A81B015BE300E14E60 /* User Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				392024A61B0155D400E14E60 /* NotificationController.swift */,
+			);
+			name = "User Notifications";
+			sourceTree = "<group>";
+		};
 		39F3062C1A11B0D500CEAE43 = {
 			isa = PBXGroup;
 			children = (
@@ -162,11 +170,11 @@
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
 				392024981B01123500E14E60 /* Constants.swift */,
 				392024961B01061F00E14E60 /* DVBAPI.swift */,
-				392024A61B0155D400E14E60 /* NotificationController.swift */,
 				3920249E1B0142CF00E14E60 /* Connections */,
 				3920249F1B0142D700E14E60 /* NSMenu */,
 				392024A51B01445900E14E60 /* Settings Window */,
 				392024A01B0142EA00E14E60 /* About Window */,
+				392024A81B015BE300E14E60 /* User Notifications */,
 				39F3063C1A11B0D500CEAE43 /* Images.xcassets */,
 				39F3063E1A11B0D500CEAE43 /* MainMenu.xib */,
 				39F306381A11B0D500CEAE43 /* Supporting Files */,
