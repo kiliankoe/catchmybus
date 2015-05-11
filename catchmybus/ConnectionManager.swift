@@ -30,9 +30,7 @@ class ConnectionManager {
 			return self.selectedConnection
 		}
 		set(newSelection) {
-			for connection in self.connections {
-				connection.selected = false
-			}
+			self.deselectAll()
 			newSelection!.selected = true
 			self.selectedConnection = newSelection // is this needed?
 		}
@@ -53,11 +51,22 @@ class ConnectionManager {
 		selectedStop = NSUserDefaults.standardUserDefaults().stringForKey(kSelectedStopKey)!
 	}
 
+	// MARK: - Manage list of connections
+
 	/**
 	Delete all stored connections
 	*/
 	internal func nuke() {
 		connections.removeAll(keepCapacity: false)
+	}
+
+	/**
+	Set all connections' selected attribute to false
+	*/
+	internal func deselectAll() {
+		for connection in connections {
+			connection.selected = false
+		}
 	}
 
 	// MARK: - Update Methods
