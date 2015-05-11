@@ -44,7 +44,6 @@
 /* Begin PBXFileReference section */
 		37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-catchmybus.release.xcconfig"; path = "Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus.release.xcconfig"; sourceTree = "<group>"; };
 		3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../dsa_pub.pem; sourceTree = "<group>"; };
-		39432B0F1A1A930C00190A42 /* catchmybus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = catchmybus.entitlements; sourceTree = "<group>"; };
 		395C2FFF1A656AD100769476 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		397278991A1800140051C208 /* ConnectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMenuItem.swift; sourceTree = "<group>"; };
 		39A5AE421A160A6A0044396A /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
@@ -111,7 +110,6 @@
 		39F306371A11B0D500CEAE43 /* catchmybus */ = {
 			isa = PBXGroup;
 			children = (
-				39432B0F1A1A930C00190A42 /* catchmybus.entitlements */,
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
 				39A5AE421A160A6A0044396A /* Connection.swift */,
 				395C2FFF1A656AD100769476 /* ConnectionManager.swift */,
@@ -214,7 +212,7 @@
 						DevelopmentTeam = HU85FER47E;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -448,11 +446,10 @@
 			baseConfigurationReference = F41E470E9735676ED10B492A /* Pods-catchmybus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = catchmybus/catchmybus.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = catchmybus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -463,11 +460,10 @@
 			baseConfigurationReference = 37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = catchmybus/catchmybus.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = catchmybus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
