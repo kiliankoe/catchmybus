@@ -24,7 +24,6 @@ class ConnectionManager {
 	private var notificationDict = [String: Int]()
 
 	var connections = [Connection]()
-	var selectedStop: String?
 	var selectedConnection: Connection? {
 		get {
 			return self.selectedConnection
@@ -35,6 +34,9 @@ class ConnectionManager {
 			self.selectedConnection = newSelection // is this needed?
 		}
 	}
+
+	var selectedStop: String?
+	// TODO: Should the ConnectionManager be keeping the list of stops as well?
 
 	// MARK: -
 
@@ -49,6 +51,17 @@ class ConnectionManager {
 		stopDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(kStopDictKey) as! [String: Int]
 		notificationDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(kNotificationDictKey) as! [String: Int]
 		selectedStop = NSUserDefaults.standardUserDefaults().stringForKey(kSelectedStopKey)!
+	}
+
+	/**
+	Save internal stopDict, notificationDict and selectedStop to NSUserDefaults
+	*/
+	internal func saveDefaults() {
+		NSUserDefaults.standardUserDefaults().setObject(stopDict, forKey: kStopDictKey)
+		NSUserDefaults.standardUserDefaults().setObject(notificationDict, forKey: kNotificationDictKey)
+		NSUserDefaults.standardUserDefaults().setObject(selectedStop, forKey: kSelectedStopKey)
+
+		NSUserDefaults.standardUserDefaults().synchronize()
 	}
 
 	// MARK: - Manage list of connections

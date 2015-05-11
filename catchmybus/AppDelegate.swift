@@ -79,10 +79,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: kNumRowsToShowKey)
-		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: kStopDictKey)
-		NSUserDefaults.standardUserDefaults().setObject(cm.notificationDict, forKey: kNotificationDictKey)
-		NSUserDefaults.standardUserDefaults().setObject(cm.selectedStop, forKey: kSelectedStopKey)
 		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: kUpdateTimeKey)
+
+		ConnectionManager.shared().saveDefaults()
 	}
 
 	// necessary for sending notifications when app is not active
