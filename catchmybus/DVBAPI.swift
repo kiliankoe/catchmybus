@@ -11,6 +11,13 @@ import Alamofire
 import SwiftyJSON
 
 class DVBAPI {
+
+	/**
+	Monitor request for a given stop. Returns data containing serving lines and a departure list amongst others.
+
+	:param: stopName   Name of a stop
+	:param: completion handler
+	*/
 	static func DMRequest(stopName: String, completion: (data: JSON?, err: NSError?) -> ()) {
 
 		let url = NSURL(string: "http://efa.faplino.de/dvb/XML_DM_REQUEST")!
