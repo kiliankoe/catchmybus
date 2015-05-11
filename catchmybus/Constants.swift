@@ -11,9 +11,9 @@
 public let kStopDictKey = "stopDict"
 public let kNotificationDictKey = "notificationDict"
 public let kSelectedStopKey = "selectedStop"
-public let kUpdateTimeKey = "updateTime"
 public let kNumRowsToShowKey = "numRowsToShow"
 public let kShouldDisplayNotifications = "shouldDisplayNotifications"
 
 // NSNotificationCenter keys
 public let kUpdatedNumRowsToShowNotification = "updatedNumRowsToShowNotification"
+public let kUpdatedShouldDisplayUserNotificationNotification = "updatedShouldDisplayUserNotificationNotification" // well fuck me...

@@ -11,19 +11,23 @@ import Cocoa
 class MenuBarController: NSMenu {
 
 	let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
-	let notification = NSUserNotification()
 
 	var isConnectionSelected = false
 
 	var stopMenuItems = [NSMenuItem]()
 
-	// FIXME: MenuBarController has to subscribe to kUpdatedNumRowsToShowNotification to update this property
+	// FIXME: MenuBarController has to subscribe to kUpdatedNumRowsToShowNotification to update this property; use updateNumRowsToShowValue for the Selector
+	// Also check if it might be better to send the value as the notification object instead of telling this when to load from NSUserDefaults
 	var numRowsToShow = 5
 
 	// MARK: -
 
 	func updateMenu() {
 
+	}
+
+	func updateNumRowsToShowValue() {
+		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey(kNumRowsToShowKey)
 	}
 
 	// MARK: - Selections
@@ -47,7 +51,7 @@ class MenuBarController: NSMenu {
 	// MARK: - IBActions
 
 	@IBAction func clearNotificationButtonPressed(sender: NSMenuItem) {
-		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
+		NotificationController.shared().removeScheduledNotification()
 		ConnectionManager.shared().deselectAll()
 		isConnectionSelected = false
 		update()

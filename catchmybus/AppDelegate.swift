@@ -27,14 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	var numRowsToShow = 3	// how many rows are shown in the menu
 	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
 
-	var updateTime = 1		// how often in minutes the app calls update()
-
-	var showNotifications = true	// if the app should show notifications or not
-
-	var notificationTime = NSDate()
-	var notificationBlockingStatusItem = false
-	var notification = NSUserNotification()		// hold a reference to the notification so there's only ever one
-
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -44,27 +36,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		var defaults: Dictionary<NSObject, AnyObject> = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße", kUpdateTimeKey : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
-		// load NSUserDefaults
-		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey(kNumRowsToShowKey)
-		numRowsToShowLabel.integerValue = numRowsToShow
-		numRowsToShowSlider.integerValue = numRowsToShow
-		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey(kStopDictKey) as! Dictionary
-		cm.notificationDict = NSUserDefaults.standardUserDefaults().objectForKey(kNotificationDictKey) as! Dictionary
-		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey(kSelectedStopKey) as! String
-		updateTime = NSUserDefaults.standardUserDefaults().integerForKey(kUpdateTimeKey)
-
 		// setup icons and NSMenuItems
 		setupUI()
-
-		// Set state for startAtLoginMenuItem
-		if NSBundle.mainBundle().isLoginItem() {
-			startAtLoginMenuItem.state = NSOnState
-		}
 
 		// Update data and UI
 		update()
 
-		// initialize timer to automatically call update() how ever often updateTime states
+		// initialize timer to automatically call update() every 60 seconds
 		NSTimer.every(60.seconds, update)
 
 		// necessary for sending notifications when app is not active
@@ -73,7 +51,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 	func applicationWillTerminate(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: kNumRowsToShowKey)
-		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: kUpdateTimeKey)
 
 		ConnectionManager.shared().saveDefaults()
 	}
