@@ -10,13 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum UpdateError {
-	case Server
-	case Request
-}
-
 class DVBAPI {
-	static func DMRequest(stopName: String, completion: (data: JSON?, err: UpdateError?) -> ()) {
+	static func DMRequest(stopName: String, completion: (data: JSON?, err: NSError?) -> ()) {
 
 		let url = NSURL(string: "http://efa.faplino.de/dvb/XML_DM_REQUEST")!
 		let params = [
@@ -31,10 +26,8 @@ class DVBAPI {
 		Alamofire.request(.GET, url, parameters: params).responseJSON { (_, res, jsonData, err) in
 			if err == nil && res?.statusCode == 200 {
 				completion(data: JSON(jsonData!), err: nil)
-			} else if err != nil && res?.statusCode == 200 {
-				completion(data: nil, err: .Server)
 			} else {
-				completion(data: nil, err: .Request)
+				completion(data: nil, err: err)
 			}
 		}
 	}
