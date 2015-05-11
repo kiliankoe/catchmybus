@@ -6,6 +6,17 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.2.2</title>
+            <description>
+                <![CDATA[
+                    <p>- Option to add as login item</p>
+                ]]>
+            </description>
+            <pubDate>Mon, 11 May 2015 13:42:00 +0000</pubDate>
+            <enclosure url="https://github.com/kiliankoe/catchmybus/releases/download/v0.2.2/catchmybus.app.zip" sparkle:version="3" sparkle:shortVersionString="0.2.2" sparkle:dsaSignature="MC0CFBOiwxJk8ZXwdjddcUDucDV+YCaeAhUAvvZ+3WeR/KD7PuPEDy2+8URwm7U=" type="application/octet-stream" />
+            <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
+        </item>
+        <item>
             <title>Version 0.2.1</title>
             <description>
                 <![CDATA[
