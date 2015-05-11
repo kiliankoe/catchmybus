@@ -12,6 +12,9 @@
 		392024991B01123500E14E60 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024981B01123500E14E60 /* Constants.swift */; };
 		3920249B1B01388900E14E60 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920249A1B01388900E14E60 /* MenuBarController.swift */; };
 		3920249D1B013B6200E14E60 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920249C1B013B6200E14E60 /* AboutWindowController.swift */; };
+		392024A31B01441E00E14E60 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024A11B01441E00E14E60 /* SettingsWindowController.swift */; };
+		392024A41B01441E00E14E60 /* SettingsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 392024A21B01441E00E14E60 /* SettingsWindowController.xib */; };
+		392024A71B0155D400E14E60 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024A61B0155D400E14E60 /* NotificationController.swift */; };
 		3936DE401AF7E2FE005E2FB1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */; };
 		395C30001A656AD100769476 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C2FFF1A656AD100769476 /* ConnectionManager.swift */; };
 		3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397278991A1800140051C208 /* ConnectionMenuItem.swift */; };
@@ -51,6 +54,9 @@
 		392024981B01123500E14E60 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3920249A1B01388900E14E60 /* MenuBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
 		3920249C1B013B6200E14E60 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		392024A11B01441E00E14E60 /* SettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		392024A21B01441E00E14E60 /* SettingsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsWindowController.xib; sourceTree = "<group>"; };
+		392024A61B0155D400E14E60 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../dsa_pub.pem; sourceTree = "<group>"; };
 		395C2FFF1A656AD100769476 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		397278991A1800140051C208 /* ConnectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMenuItem.swift; sourceTree = "<group>"; };
@@ -121,6 +127,15 @@
 			name = "About Window";
 			sourceTree = "<group>";
 		};
+		392024A51B01445900E14E60 /* Settings Window */ = {
+			isa = PBXGroup;
+			children = (
+				392024A11B01441E00E14E60 /* SettingsWindowController.swift */,
+				392024A21B01441E00E14E60 /* SettingsWindowController.xib */,
+			);
+			name = "Settings Window";
+			sourceTree = "<group>";
+		};
 		39F3062C1A11B0D500CEAE43 = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +162,10 @@
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
 				392024981B01123500E14E60 /* Constants.swift */,
 				392024961B01061F00E14E60 /* DVBAPI.swift */,
+				392024A61B0155D400E14E60 /* NotificationController.swift */,
 				3920249E1B0142CF00E14E60 /* Connections */,
 				3920249F1B0142D700E14E60 /* NSMenu */,
+				392024A51B01445900E14E60 /* Settings Window */,
 				392024A01B0142EA00E14E60 /* About Window */,
 				39F3063C1A11B0D500CEAE43 /* Images.xcassets */,
 				39F3063E1A11B0D500CEAE43 /* MainMenu.xib */,
@@ -284,6 +301,7 @@
 			files = (
 				39F3063D1A11B0D500CEAE43 /* Images.xcassets in Resources */,
 				3936DE401AF7E2FE005E2FB1 /* dsa_pub.pem in Resources */,
+				392024A41B01441E00E14E60 /* SettingsWindowController.xib in Resources */,
 				39F306401A11B0D500CEAE43 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +381,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				392024A71B0155D400E14E60 /* NotificationController.swift in Sources */,
 				395C30001A656AD100769476 /* ConnectionManager.swift in Sources */,
+				392024A31B01441E00E14E60 /* SettingsWindowController.swift in Sources */,
 				39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */,
 				39A5AE431A160A6A0044396A /* Connection.swift in Sources */,
 				3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */,

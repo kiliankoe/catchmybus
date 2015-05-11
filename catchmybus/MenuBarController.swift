@@ -17,6 +17,9 @@ class MenuBarController: NSMenu {
 
 	var stopMenuItems = [NSMenuItem]()
 
+	// FIXME: MenuBarController has to subscribe to kUpdatedNumRowsToShowNotification to update this property
+	var numRowsToShow = 5
+
 	// MARK: -
 
 	func updateMenu() {
@@ -51,7 +54,7 @@ class MenuBarController: NSMenu {
 	}
 
 	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
-		appDelegate.settingsWindow.makeKeyAndOrderFront(nil)
+		appDelegate.settingsWindowController.display()
 		NSApp.activateIgnoringOtherApps(true)
 	}
 

@@ -16,13 +16,7 @@ import SwiftyTimer
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
-	// Settings window
-	@IBOutlet weak var settingsWindow: NSWindow!
-	@IBOutlet weak var numRowsToShowLabel: NSTextField!
-	@IBOutlet weak var numRowsToShowSlider: NSSlider!
-	@IBOutlet weak var notificationsCheckbox: NSButton!
-
-	// About window
+	internal let settingsWindowController = SettingsWindowController()
 	internal let aboutWindowController = AboutWindowController()
 
 	// NSMenu
@@ -195,32 +189,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		}
 	}
 
-	// Settings window
-	@IBAction func numRowsToShowSliderChanged(sender: NSSlider) {
-		numRowsToShowLabel.integerValue = sender.integerValue
-		numRowsToShow = sender.integerValue
-		updateUI()
-	}
-
-	@IBAction func notificationsCheckboxClicked(sender: NSButton) {
-		if (sender.state == NSOnState) {
-			showNotifications = true
-		} else {
-			showNotifications = false
-		}
-	}
-
 	// NSMenu
-
-	@IBAction func startAtLoginButtonPressed(sender: NSMenuItem) {
-		if sender.state == NSOnState {
-			NSBundle.mainBundle().removeFromLoginItems()
-			sender.state = NSOffState
-		} else {
-			NSBundle.mainBundle().addToLoginItems()
-			sender.state = NSOnState
-		}
-	}
 
 	func connectionSelected(sender: ConnectionMenuItem) {
 //		NSLog("Set a notification for \(sender.connection.toString())")
