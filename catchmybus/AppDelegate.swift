@@ -11,6 +11,7 @@
 import Cocoa
 import IYLoginItem
 import PFAboutWindow
+import SwiftyTimer
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
@@ -82,7 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 
 		// initialize timer to automatically call update() how ever often updateTime states
-		let timer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(updateTime * 60), target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+		NSTimer.every(60.seconds, update)
 
 		// necessary for sending notifications when app is not active
 		NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
