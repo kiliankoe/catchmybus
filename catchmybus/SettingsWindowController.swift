@@ -26,6 +26,25 @@ class SettingsWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
 
+		let numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey(kNumRowsToShowKey)
+		numRowsToShowLabel.integerValue = numRowsToShow
+		numRowsToShowSlider.integerValue = numRowsToShow
+
+		let shouldDisplayNotifications = NSUserDefaults.standardUserDefaults().boolForKey(kShouldDisplayNotifications)
+		if shouldDisplayNotifications {
+			displayNotificationsCheckbox.state = NSOnState
+		} else {
+			displayNotificationsCheckbox.state = NSOffState
+		}
+
+		if NSBundle.mainBundle().isLoginItem() {
+			startAppAtLoginCheckbox.state = NSOnState
+		} else {
+			startAppAtLoginCheckbox.state = NSOffState
+		}
+
+		// TODO: Use NSLocalizedStrings to update labels for all UI elements
+
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
 
