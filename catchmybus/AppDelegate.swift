@@ -23,16 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	@IBOutlet weak var notificationsCheckbox: NSButton!
 
 	// About window
-	let aboutWindowController = PFAboutWindowController()
+	internal let aboutWindowController = AboutWindowController()
 
 	// NSMenu
 	@IBOutlet weak var statusMenu: NSMenu!
-	@IBOutlet weak var manualRefreshButtonLabel: NSMenuItem!
-	@IBOutlet weak var startAtLoginMenuItem: NSMenuItem!
 
 	var stopLabels: [NSMenuItem] = []
-
-	let cm = ConnectionManager()
 
 	var numRowsToShow = 3	// how many rows are shown in the menu
 	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
@@ -73,14 +69,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		// Update data and UI
 		update()
-
-		// Fill about window with info
-		aboutWindowController.appName = "catchmybus"
-		aboutWindowController.appURL = NSURL(string: "http://catchmybus.kilian.io")
-		aboutWindowController.appCopyright = NSAttributedString(string: "Copyright (c) 2015 Kilian Koeltzsch")
-		aboutWindowController.appEULA = NSAttributedString(string: "The MIT License (MIT)\n\nCopyright (c) 2015 Kilian Koeltzsch\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.")
-		aboutWindowController.appCredits = NSAttributedString(string: "Thanks for help and tipps @h4llow3En\n\nName and idea shamelessly stolen from @hoodie")
-
 
 		// initialize timer to automatically call update() how ever often updateTime states
 		NSTimer.every(60.seconds, update)
@@ -224,14 +212,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	// NSMenu
-	@IBAction func refreshClicked(sender: NSMenuItem) {
-		update()
-	}
-
-	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
-		settingsWindow.makeKeyAndOrderFront(sender)
-		NSApp.activateIgnoringOtherApps(true)
-	}
 
 	@IBAction func startAtLoginButtonPressed(sender: NSMenuItem) {
 		if sender.state == NSOnState {
@@ -241,39 +221,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 			NSBundle.mainBundle().addToLoginItems()
 			sender.state = NSOnState
 		}
-	}
-
-	@IBAction func aboutButtonPressed(sender: NSMenuItem) {
-//		aboutWindow.makeKeyAndOrderFront(sender)
-		aboutWindowController.showWindow(nil)
-		NSApp.activateIgnoringOtherApps(true)
-	}
-
-	@IBAction func clearNotificationButtonPressed(sender: NSMenuItem) {
-		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
-		for c in cm.connections {
-			c.selected = false
-		}
-		notificationBlockingStatusItem = false
-		update()
-	}
-	
-	@IBAction func selectStop(sender: NSMenuItem) {
-		self.cm.selectedStop = sender.title
-		for label in stopLabels {
-			label.state = NSOffState
-		}
-		sender.state = NSOnState
-
-		// clear a blocking statusitem if it's set
-		notificationBlockingStatusItem = false
-
-		cm.nuke()
-		update()
-	}
-
-	@IBAction func quitButtonPressed(sender: NSMenuItem) {
-		NSApplication.sharedApplication().terminate(self)
 	}
 
 	func connectionSelected(sender: ConnectionMenuItem) {
