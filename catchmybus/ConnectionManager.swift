@@ -7,123 +7,90 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+private let _ConnectionManagerSharedInstace = ConnectionManager()
 
 class ConnectionManager {
 
-	// TODO: Add an init method that loads stuff from NSUserDefaults
-
-	var stopDict: Dictionary<String, Int> = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
-	// I hate this... for the sake of NSUserDefaults being crappy
-	var notificationDict: Dictionary<String, Int> = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
-	var selectedStop = "Helmholtzstraße"
-
-	func updateStopDict(newStopDict: Dictionary<String, Int>) {
-		// TODO: I believe I should be implemented. Maybe fix that?
+	// ConnectionManager is a singleton, accessible via ConnectionManager.shared()
+	static func shared() -> ConnectionManager {
+		return _ConnectionManagerSharedInstace
 	}
 
+	// MARK: - Properties
+
+	private var stopDict = [String: Int]()
+	private var notificationDict = [String: Int]()
+
 	var connections = [Connection]()
+	var selectedStop: String?
+	var selectedConnection: Connection? {
+		get {
+			return self.selectedConnection
+		}
+		set(newSelection) {
+			for connection in self.connections {
+				connection.selected = false
+			}
+			newSelection!.selected = true
+			self.selectedConnection = newSelection // is this needed?
+		}
+	}
 
-	// need something here, and I don't feel like checking for an optional at the other end
-	var selectedConnection: Connection = Connection(line: "", direction: "", arrivalMinutes: 1337)
+	// MARK: -
 
-	func update(callback: () -> Void) {
-		// update arrival minutes for currently known connections
+	init () {
+		loadDefaults()
+	}
+
+	/**
+	Load internal stopDict, notificationDict and selectedStop from NSUserDefaults
+	*/
+	internal func loadDefaults() {
+		stopDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(kStopDictKey) as! [String: Int]
+		notificationDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(kNotificationDictKey) as! [String: Int]
+		selectedStop = NSUserDefaults.standardUserDefaults().stringForKey(kSelectedStopKey)!
+	}
+
+	/**
+	Delete all stored connections
+	*/
+	internal func nuke() {
+		connections.removeAll(keepCapacity: false)
+	}
+
+	// MARK: - Update Methods
+
+	/**
+	Update arrival countdowns for known connections and remove connections that lie in the past
+	*/
+	internal func updateConnectionCountdowns() {
+		// Update arrival countdowns for currently known connections
 		for connection in connections {
 			connection.update()
 		}
 
-		// clear out old connections that have passed the current time
-		connections = connections.filter({(c: Connection) -> Bool in
-			return c.arrivalDate.timeIntervalSinceNow > 0
-		})
-
-		// fetch new data
-		var pretime = 0
-		if (stopDict[selectedStop] != nil) {
-			pretime = stopDict[selectedStop]!
+		// Remove connections that lie in the past
+		connections = connections.filter { (c: Connection) -> Bool in
+			return c.date.timeIntervalSinceNow > 0
 		}
-		var requestURL = NSURL(string: "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do")
-		let requestParams = [
-			"hst": selectedStop,
-			"vz": "\(pretime)",
-			"ort": "Dresden",
-			"lim": "30"
-		]
-		requestURL = self.NSURLByAppendingQueryParameters(requestURL, queryParameters: requestParams)
-		let requestTask = NSURLSession.sharedSession().dataTaskWithURL(requestURL!) { (data, response, error) in
-			if let output = (NSString(data: data, encoding: NSUTF8StringEncoding)) {
-				var parseError: NSError?
-				let parsedObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parseError)
-				if let connectionList = parsedObject as? NSArray {
-					if (connectionList.count > 0) {
-						for connectionItem in connectionList {
-							// transfer a single connection's array into its components
-							let line = connectionItem[0] as! String
-							let direction = connectionItem[1] as! String
-							var arrivalMinutes: Int
-							if (connectionItem[2] as! String == "") {
-								arrivalMinutes = 0
-							} else {
-								let arrivalMinutesString = connectionItem[2] as! String
-								arrivalMinutes = arrivalMinutesString.toInt()!
-							}
-							let newConnection = Connection(line: line, direction: direction, arrivalMinutes: arrivalMinutes)
+	}
 
-							// Get the arrivaltime for the latest already known connection so that
-							// only those with a later arrivaltime can bed added
-							if let lastConnection = self.connections.last {
-								let lastConnectionDate = lastConnection.arrivalDate
-								if (newConnection.arrivalDate.laterDate(lastConnectionDate) == newConnection.arrivalDate) {
-									// the date on this new connection is later than the one for the last
-									// connection in the list
-									// FIXME: This might result in a duplicate entry if it's only off by a little, possible fix below
-									let dateDiff = lastConnection.arrivalDate.timeIntervalSinceDate(newConnection.arrivalDate)
-									if (lastConnection.line != newConnection.line || lastConnection.direction != newConnection.direction || abs(dateDiff) > 90) {
-										self.connections.append(newConnection)
-									}
-								}
-							} else {
-								// apparenlty self.connections is still empty
-								self.connections.append(newConnection)
-							}
-						}
-					}
-					callback()
-				}
-			}
+	/**
+	Make a call to DVBAPI to update list of connections
+
+	:param: completion handler when new data has been stored in connection list, will not be called on error
+	*/
+	internal func updateConnections(completion: (err: NSError?) -> Void) {
+		if let selectedStopName = selectedStop {
+			DVBAPI.DMRequest(selectedStopName, completion: { (data, err) -> () in
+				println(data)
+				completion(err: nil)
+			})
+		} else {
+			NSLog("Update error: No selected stop")
+			completion(err: NSError(domain: "io.kilian.catchmybus", code: 0, userInfo: [NSLocalizedDescriptionKey: "Update error: No selected stop"]))
 		}
-
-		requestTask.resume()
 	}
-
-	func nuke() {
-		connections.removeAll(keepCapacity: false)
-	}
-
-	func selectConnection(connectionToSelect: Connection) {
-		for connection in connections {
-			connection.selected = false
-		}
-		connectionToSelect.selected = true
-		selectedConnection = connectionToSelect
-	}
-
-	// MARK: - Helper functions for NSURL
-
-	func stringFromQueryParameters(queryParameters: Dictionary<String, String>) -> String {
-		var parts: [String] = []
-		for (name, value) in queryParameters {
-			var part = NSString(format: "%@=%@",
-				name.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!,
-				value.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
-			parts.append(part as! String)
-		}
-		return "&".join(parts)
-	}
-
-	func NSURLByAppendingQueryParameters(URL: NSURL!, queryParameters: Dictionary<String, String>) -> NSURL {
-		let URLString: NSString = NSString(format: "%@?%@", URL.absoluteString!, self.stringFromQueryParameters(queryParameters))
-		return NSURL(string: URLString as! String)!
-	}
-
 }
