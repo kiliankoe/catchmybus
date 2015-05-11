@@ -51,17 +51,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// initialize default NSUserDefaults
 		let defaultStopDict = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
 		let defaultNotificationDict = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
-		var defaults: Dictionary<NSObject, AnyObject> = ["numRowsToShow" : 5, "stopDict" : defaultStopDict, "notificationDict": defaultNotificationDict, "selectedStop": "Helmholtzstraße", "updateTime" : 1]
+		var defaults: Dictionary<NSObject, AnyObject> = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße", kUpdateTimeKey : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// load NSUserDefaults
-		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey("numRowsToShow")
+		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey(kNumRowsToShowKey)
 		numRowsToShowLabel.integerValue = numRowsToShow
 		numRowsToShowSlider.integerValue = numRowsToShow
-		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey("stopDict") as! Dictionary
-		cm.notificationDict = NSUserDefaults.standardUserDefaults().objectForKey("notificationDict") as! Dictionary
-		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey("selectedStop") as! String
-		updateTime = NSUserDefaults.standardUserDefaults().integerForKey("updateTime")
+		cm.stopDict = NSUserDefaults.standardUserDefaults().objectForKey(kStopDictKey) as! Dictionary
+		cm.notificationDict = NSUserDefaults.standardUserDefaults().objectForKey(kNotificationDictKey) as! Dictionary
+		cm.selectedStop = NSUserDefaults.standardUserDefaults().objectForKey(kSelectedStopKey) as! String
+		updateTime = NSUserDefaults.standardUserDefaults().integerForKey(kUpdateTimeKey)
 
 		// setup icons and NSMenuItems
 		setupUI()
@@ -90,11 +90,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {
-		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: "numRowsToShow")
-		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: "stopDict")
-		NSUserDefaults.standardUserDefaults().setObject(cm.notificationDict, forKey: "notificationDict")
-		NSUserDefaults.standardUserDefaults().setObject(cm.selectedStop, forKey: "selectedStop")
-		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: "updateTime")
+		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: kNumRowsToShowKey)
+		NSUserDefaults.standardUserDefaults().setObject(cm.stopDict, forKey: kStopDictKey)
+		NSUserDefaults.standardUserDefaults().setObject(cm.notificationDict, forKey: kNotificationDictKey)
+		NSUserDefaults.standardUserDefaults().setObject(cm.selectedStop, forKey: kSelectedStopKey)
+		NSUserDefaults.standardUserDefaults().setInteger(updateTime, forKey: kUpdateTimeKey)
 	}
 
 	// necessary for sending notifications when app is not active

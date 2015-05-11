@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3500788DED964CC8E95C8859 /* Pods_catchmybus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A7C3BE161D884E94D8D645 /* Pods_catchmybus.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		392024971B01061F00E14E60 /* DVBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024961B01061F00E14E60 /* DVBAPI.swift */; };
+		392024991B01123500E14E60 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024981B01123500E14E60 /* Constants.swift */; };
 		3936DE401AF7E2FE005E2FB1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */; };
 		395C30001A656AD100769476 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395C2FFF1A656AD100769476 /* ConnectionManager.swift */; };
 		3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397278991A1800140051C208 /* ConnectionMenuItem.swift */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-catchmybus.release.xcconfig"; path = "Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus.release.xcconfig"; sourceTree = "<group>"; };
+		392024961B01061F00E14E60 /* DVBAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVBAPI.swift; sourceTree = "<group>"; };
+		392024981B01123500E14E60 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3936DE3F1AF7E2FE005E2FB1 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../dsa_pub.pem; sourceTree = "<group>"; };
 		395C2FFF1A656AD100769476 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		397278991A1800140051C208 /* ConnectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMenuItem.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */,
 				39A5AE421A160A6A0044396A /* Connection.swift */,
 				395C2FFF1A656AD100769476 /* ConnectionManager.swift */,
+				392024981B01123500E14E60 /* Constants.swift */,
+				392024961B01061F00E14E60 /* DVBAPI.swift */,
 				397278991A1800140051C208 /* ConnectionMenuItem.swift */,
 				39F3063C1A11B0D500CEAE43 /* Images.xcassets */,
 				39F3063E1A11B0D500CEAE43 /* MainMenu.xib */,
@@ -331,6 +337,8 @@
 				39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */,
 				39A5AE431A160A6A0044396A /* Connection.swift in Sources */,
 				3972789A1A1800140051C208 /* ConnectionMenuItem.swift in Sources */,
+				392024971B01061F00E14E60 /* DVBAPI.swift in Sources */,
+				392024991B01123500E14E60 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
