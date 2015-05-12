@@ -16,9 +16,14 @@ class MenuBarController: NSMenu {
 
 	var stopMenuItems = [NSMenuItem]()
 
-	// FIXME: MenuBarController has to subscribe to kUpdatedNumRowsToShowNotification to update this property; use updateNumRowsToShowValue for the Selector
-	// Also check if it might be better to send the value as the notification object instead of telling this when to load from NSUserDefaults
 	var numRowsToShow = 5
+
+	required init(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+
+		// TODO: Check if it might be better to send the value as the notification object instead of telling this when to load from NSUserDefaults
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNumRowsToShowValue", name: kUpdatedNumRowsToShowNotification, object: nil)
+	}
 
 	// MARK: -
 
@@ -28,6 +33,7 @@ class MenuBarController: NSMenu {
 
 	func updateNumRowsToShowValue() {
 		numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey(kNumRowsToShowKey)
+		// TODO: Probably reload the menu here to display the changed value?
 	}
 
 	// MARK: - Selections
