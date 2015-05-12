@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MenuBarController: NSMenu {
+class MenuController: NSMenu {
 
 	let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 
@@ -50,7 +50,10 @@ class MenuBarController: NSMenu {
 		sender.state = NSOnState
 
 		isConnectionSelected = false
+
 		ConnectionManager.shared().nuke()
+		ConnectionManager.shared().saveDefaults()
+		
 		update()
 	}
 

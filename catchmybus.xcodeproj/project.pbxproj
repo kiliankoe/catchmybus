@@ -10,7 +10,7 @@
 		3500788DED964CC8E95C8859 /* Pods_catchmybus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A7C3BE161D884E94D8D645 /* Pods_catchmybus.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		392024971B01061F00E14E60 /* DVBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024961B01061F00E14E60 /* DVBAPI.swift */; };
 		392024991B01123500E14E60 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024981B01123500E14E60 /* Constants.swift */; };
-		3920249B1B01388900E14E60 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920249A1B01388900E14E60 /* MenuBarController.swift */; };
+		3920249B1B01388900E14E60 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920249A1B01388900E14E60 /* MenuController.swift */; };
 		3920249D1B013B6200E14E60 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920249C1B013B6200E14E60 /* AboutWindowController.swift */; };
 		392024A31B01441E00E14E60 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392024A11B01441E00E14E60 /* SettingsWindowController.swift */; };
 		392024A41B01441E00E14E60 /* SettingsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 392024A21B01441E00E14E60 /* SettingsWindowController.xib */; };
@@ -52,7 +52,7 @@
 		37A1DAE7C31B5C370159CE35 /* Pods-catchmybus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-catchmybus.release.xcconfig"; path = "Pods/Target Support Files/Pods-catchmybus/Pods-catchmybus.release.xcconfig"; sourceTree = "<group>"; };
 		392024961B01061F00E14E60 /* DVBAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVBAPI.swift; sourceTree = "<group>"; };
 		392024981B01123500E14E60 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3920249A1B01388900E14E60 /* MenuBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		3920249A1B01388900E14E60 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		3920249C1B013B6200E14E60 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		392024A11B01441E00E14E60 /* SettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		392024A21B01441E00E14E60 /* SettingsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsWindowController.xib; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		3920249F1B0142D700E14E60 /* NSMenu */ = {
 			isa = PBXGroup;
 			children = (
-				3920249A1B01388900E14E60 /* MenuBarController.swift */,
+				3920249A1B01388900E14E60 /* MenuController.swift */,
 				397278991A1800140051C208 /* ConnectionMenuItem.swift */,
 			);
 			name = NSMenu;
@@ -398,7 +398,7 @@
 				392024971B01061F00E14E60 /* DVBAPI.swift in Sources */,
 				3920249D1B013B6200E14E60 /* AboutWindowController.swift in Sources */,
 				392024991B01123500E14E60 /* Constants.swift in Sources */,
-				3920249B1B01388900E14E60 /* MenuBarController.swift in Sources */,
+				3920249B1B01388900E14E60 /* MenuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
