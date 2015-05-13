@@ -36,8 +36,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		var defaults: Dictionary<NSObject, AnyObject> = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße", kUpdateTimeKey : 1]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
-		// setup icons and NSMenuItems
-		setupUI()
+		// setup statusItem
+		let icon = NSImage(named: "statusIcon")
+		icon?.setTemplate(true)
+		statusItem.image = icon
+		statusItem.menu = statusMenu
 
 		// Update data and UI
 		update()
@@ -61,9 +64,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	func setupUI() {
-		let icon = NSImage(named: "statusIcon")
-		icon?.setTemplate(true)
-
 		// Initialize stops
 		for stop in cm.stopDict {
 			let stopMenuItem = NSMenuItem(title: stop.0, action: Selector("selectStop:"), keyEquivalent: "")
@@ -73,9 +73,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 				stopMenuItem.state = NSOnState
 			}
 		}
-
-		statusItem.image = icon
-		statusItem.menu = statusMenu
 	}
 
 	func updateUI() {
