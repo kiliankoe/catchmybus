@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	var numRowsToShow = 3	// how many rows are shown in the menu
 	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
 
-	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// initialize default NSUserDefaults
