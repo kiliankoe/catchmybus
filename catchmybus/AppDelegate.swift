@@ -9,38 +9,29 @@
 //  The term 'Bus' is used for both busses and trams in this app
 
 import Cocoa
-import IYLoginItem
-import PFAboutWindow
 import SwiftyTimer
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
+	// TODO: Remove these references, the windows probably shouldn't be held in memory all the time the app is running
 	internal let settingsWindowController = SettingsWindowController()
 	internal let aboutWindowController = AboutWindowController()
 
-	// NSMenu
-	@IBOutlet weak var statusMenu: NSMenu!
-
-	var stopLabels: [NSMenuItem] = []
-
-	var numRowsToShow = 3	// how many rows are shown in the menu
-	var numShownRows = 0	// tmp variable to store how many rows can be cleared on the next update
-
-	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// initialize default NSUserDefaults
 		let defaultStopDict = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
 		let defaultNotificationDict = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
-		var defaults: Dictionary<NSObject, AnyObject> = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße", kUpdateTimeKey : 1]
+		var defaults: Dictionary<NSObject, AnyObject> = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße"]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// setup statusItem
 		let icon = NSImage(named: "statusIcon")
 		icon?.setTemplate(true)
 		statusItem.image = icon
-		statusItem.menu = statusMenu
+		statusItem.menu = MenuController()
 
 		// Update data and UI
 		update()

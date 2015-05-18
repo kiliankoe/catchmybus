@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Sparkle
 
 class MenuController: NSMenu {
 
@@ -21,8 +22,62 @@ class MenuController: NSMenu {
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 
+		fatalError("Initialized NSMenu through init(coder:). Wat?")
+	}
+
+	init() {
+		// FIXME: Why is this not throwing errors with init(title:), but init() is not ok?
+		super.init(title: "")
+
+		setupMainMenuItems()
+
 		// TODO: Check if it might be better to send the value as the notification object instead of telling this when to load from NSUserDefaults
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNumRowsToShowValue", name: kUpdatedNumRowsToShowNotification, object: nil)
+	}
+
+	/**
+	Sets up the main NSMenuItems for the menu, so it'll look like this:
+	
+	[Connections will be listed here]
+	-----
+	[Stops will be listed here]
+	-----
+	Settings...
+	Check for updates...
+	About...
+	Quit
+
+	*/
+	private func setupMainMenuItems() {
+		// Connections will be listed here
+		self.addItem(NSMenuItem.separatorItem())
+		// Stops will be listed here
+		self.addItem(NSMenuItem.separatorItem())
+		self.addItem(ClosureMenuItem(title: "Settings...", keyEquivalent: ",", action: { () -> () in
+			self.appDelegate.settingsWindowController.display()
+		}))
+		self.addItem(ClosureMenuItem(title: "Check for updates...", keyEquivalent: "", action: { () -> () in
+			let updater = SUUpdater(forBundle: NSBundle.mainBundle())
+			updater.checkForUpdates(updater)
+		}))
+		self.addItem(ClosureMenuItem(title: "About...", keyEquivalent: "", action: { () -> () in
+			self.appDelegate.aboutWindowController.display()
+		}))
+		self.addItem(NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "q"))
+	}
+
+	/**
+	Sets up the NSMenuItems for all saved stops
+	*/
+	private func setupStopMenuItems() {
+		for stop in ConnectionManager.shared().stopDict {
+			let stopMenuItem = NSMenuItem(title: stop.0, action: "selectStop:", keyEquivalent: "")
+			stopMenuItems.append(stopMenuItem)
+			self.insertItem(stopMenuItem, atIndex: 1)
+			if (stop.0 == ConnectionManager.shared().selectedStop) {
+				stopMenuItem.state = NSOnState
+			}
+		}
 	}
 
 	// MARK: -
@@ -57,25 +112,13 @@ class MenuController: NSMenu {
 		update()
 	}
 
-	// MARK: - IBActions
+	// MARK: - Actions
 
-	@IBAction func clearNotificationButtonPressed(sender: NSMenuItem) {
+	// TODO: Remove me in favor of removing the notification by clicking on the selected connection again
+	func clearNotificationButtonPressed(sender: NSMenuItem) {
 		NotificationController.shared().removeScheduledNotification()
 		ConnectionManager.shared().deselectAll()
 		isConnectionSelected = false
 		update()
-	}
-
-	@IBAction func settingsButtonPressed(sender: NSMenuItem) {
-		appDelegate.settingsWindowController.display()
-		NSApp.activateIgnoringOtherApps(true)
-	}
-
-	@IBAction func aboutButtonPressed(sender: NSMenuItem) {
-		appDelegate.aboutWindowController.display()
-	}
-
-	@IBAction func quitButtonPressed(sender: NSMenuItem) {
-		NSApplication.sharedApplication().terminate(self)
 	}
 }
