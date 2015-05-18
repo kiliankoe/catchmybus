@@ -20,8 +20,8 @@ class ConnectionManager {
 
 	// MARK: - Properties
 
-	private var stopDict = [String: Int]()
-	private var notificationDict = [String: Int]()
+	internal var stopDict = [String: Int]()
+	internal var notificationDict = [String: Int]()
 
 	var connections = [Connection]()
 	var selectedConnection: Connection? {

@@ -44,9 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {
-		NSUserDefaults.standardUserDefaults().setInteger(numRowsToShow, forKey: kNumRowsToShowKey)
 
-		ConnectionManager.shared().saveDefaults()
 	}
 
 	// necessary for sending notifications when app is not active
