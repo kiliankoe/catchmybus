@@ -25,6 +25,7 @@ class SettingsWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+		NSLog("Settings window did load")
 
 		let numRowsToShow = NSUserDefaults.standardUserDefaults().integerForKey(kNumRowsToShowKey)
 		numRowsToShowLabel.integerValue = numRowsToShow
@@ -49,8 +50,11 @@ class SettingsWindowController: NSWindowController {
     }
 
 	internal func display() {
+		// FIXME: This isn't working. Interestingly enough the window is also not opened when I set it to be displayed at launch in the xib. Something's not right.
 		self.window?.makeKeyAndOrderFront(nil)
+//		self.showWindow(nil)
 		NSApp.activateIgnoringOtherApps(true)
+		NSLog("Settings window displaying")
 	}
 
 	// MARK: - IBActions
