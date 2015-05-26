@@ -8,12 +8,12 @@
 
 
 // NSUserDefaults keys
-public let kStopDictKey = "stopDict"
-public let kNotificationDictKey = "notificationDict"
-public let kSelectedStopKey = "selectedStop"
-public let kNumRowsToShowKey = "numRowsToShow"
-public let kShouldDisplayNotifications = "shouldDisplayNotifications"
+internal let kStopDictKey = "stopDict"
+internal let kNotificationDictKey = "notificationDict"
+internal let kSelectedStopKey = "selectedStop"
+internal let kNumRowsToShowKey = "numRowsToShow"
+internal let kShouldDisplayNotifications = "shouldDisplayNotifications"
 
 // NSNotificationCenter keys
-public let kUpdatedNumRowsToShowNotification = "updatedNumRowsToShowNotification"
-public let kUpdatedShouldDisplayUserNotificationNotification = "updatedShouldDisplayUserNotificationNotification" // well fuck me...
+internal let kUpdatedNumRowsToShowNotification = "updatedNumRowsToShowNotification"
+internal let kUpdatedShouldDisplayUserNotificationNotification = "updatedShouldDisplayUserNotificationNotification" // well fuck me...
