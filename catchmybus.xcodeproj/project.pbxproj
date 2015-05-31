@@ -21,6 +21,8 @@
 		39A5AE431A160A6A0044396A /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5AE421A160A6A0044396A /* Connection.swift */; };
 		39A7305D1B09CF9F0040068E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39A7305C1B09CF9F0040068E /* Localizable.strings */; };
 		39A7305F1B0A27960040068E /* ClosureMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A7305E1B0A27960040068E /* ClosureMenuItem.swift */; };
+		39EE99141B1A861E0059E01B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE99121B1A861E0059E01B /* Fabric.framework */; };
+		39EE99151B1A861E0059E01B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE99131B1A861E0059E01B /* Crashlytics.framework */; };
 		39F3063B1A11B0D500CEAE43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */; };
 		39F3063D1A11B0D500CEAE43 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F3063C1A11B0D500CEAE43 /* Images.xcassets */; };
 		39F306401A11B0D500CEAE43 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F3063E1A11B0D500CEAE43 /* MainMenu.xib */; };
@@ -65,6 +67,8 @@
 		39A5AE421A160A6A0044396A /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		39A7305C1B09CF9F0040068E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		39A7305E1B0A27960040068E /* ClosureMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureMenuItem.swift; sourceTree = "<group>"; };
+		39EE99121B1A861E0059E01B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		39EE99131B1A861E0059E01B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		39F306351A11B0D500CEAE43 /* catchmybus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = catchmybus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F306391A11B0D500CEAE43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39F3063A1A11B0D500CEAE43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3500788DED964CC8E95C8859 /* Pods_catchmybus.framework in Frameworks */,
+				39EE99151B1A861E0059E01B /* Crashlytics.framework in Frameworks */,
+				39EE99141B1A861E0059E01B /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +223,8 @@
 		526C9F337D0BEA297946ECCC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39EE99121B1A861E0059E01B /* Fabric.framework */,
+				39EE99131B1A861E0059E01B /* Crashlytics.framework */,
 				54A7C3BE161D884E94D8D645 /* Pods_catchmybus.framework */,
 			);
 			name = Frameworks;
@@ -237,6 +245,7 @@
 				0C0881EC93CD934DCDCF8060 /* Copy Pods Resources */,
 				39DD2B1D1AF7D6EF0026CD51 /* ShellScript */,
 				4FF79AD97FDB6853112B3347 /* Embed Pods Frameworks */,
+				39EE99111B1A84C50059E01B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -373,6 +382,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\n\n# Usually set by Xcode\nCODE_SIGN_IDENTITY=\"Kilian Koeltzsch\"\n\ncodesign --verbose --force --sign \"$CODE_SIGN_IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
+		};
+		39EE99111B1A84C50059E01B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run a73c412e3cdf6638dff0bb09b90292655ab3eecd 7899bb8bd32e08f690b8d3b6bb215ea4010ad734af9516ad408a25025c942313";
 		};
 		4FF79AD97FDB6853112B3347 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -523,6 +545,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = catchmybus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -537,6 +565,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = catchmybus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

@@ -9,6 +9,8 @@
 //  The term 'Bus' is used for both busses and trams in this app
 
 import Cocoa
+import Fabric
+import Crashlytics
 import SwiftyTimer
 
 @NSApplicationMain
@@ -21,6 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+		Fabric.with([Crashlytics()])
+
 		// initialize default NSUserDefaults
 		let defaultStopDict = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
 		let defaultNotificationDict = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
