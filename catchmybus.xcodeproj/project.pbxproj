@@ -243,9 +243,10 @@
 				39F306331A11B0D500CEAE43 /* Resources */,
 				3923C62F1A1273EC00E8BA7E /* Copy Frameworks */,
 				0C0881EC93CD934DCDCF8060 /* Copy Pods Resources */,
-				39DD2B1D1AF7D6EF0026CD51 /* ShellScript */,
+				39DD2B1D1AF7D6EF0026CD51 /* Codesign */,
 				4FF79AD97FDB6853112B3347 /* Embed Pods Frameworks */,
-				39EE99111B1A84C50059E01B /* ShellScript */,
+				39EE99111B1A84C50059E01B /* Authenticate Fabric */,
+				39C4341C1B1B530300C5D231 /* Increment Build Number on each build */,
 			);
 			buildRules = (
 			);
@@ -370,26 +371,42 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		39DD2B1D1AF7D6EF0026CD51 /* ShellScript */ = {
+		39C4341C1B1B530300C5D231 /* Increment Build Number on each build */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Increment Build Number on each build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		39DD2B1D1AF7D6EF0026CD51 /* Codesign */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Codesign;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\n\n# Usually set by Xcode\nCODE_SIGN_IDENTITY=\"Kilian Koeltzsch\"\n\ncodesign --verbose --force --sign \"$CODE_SIGN_IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
 		};
-		39EE99111B1A84C50059E01B /* ShellScript */ = {
+		39EE99111B1A84C50059E01B /* Authenticate Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Authenticate Fabric";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
