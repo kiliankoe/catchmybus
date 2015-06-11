@@ -17,8 +17,11 @@ import SwiftyTimer
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
 	// TODO: Remove these references, the windows probably shouldn't be held in memory all the time the app is running
-	internal let settingsWindowController = SettingsWindowController()
-	internal let aboutWindowController = AboutWindowController()
+	let settingsWindowController = SettingsWindowController()
+	let aboutWindowController = AboutWindowController()
+
+	let menuController = MenuController()
+	let connectionManager = ConnectionManager()
 
 	let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -47,159 +50,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
 	}
 
-	func applicationWillTerminate(notification: NSNotification) {
-
-	}
-
 	// necessary for sending notifications when app is not active
 	func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
 		return true
 	}
 
-	func setupUI() {
-		// Initialize stops
-		for stop in cm.stopDict {
-			let stopMenuItem = NSMenuItem(title: stop.0, action: Selector("selectStop:"), keyEquivalent: "")
-			stopLabels.append(stopMenuItem)
-			statusMenu.insertItem(stopMenuItem, atIndex: 1)
-			if (stop.0 == cm.selectedStop) {
-				stopMenuItem.state = NSOnState
-			}
-		}
-	}
-
-	func updateUI() {
-		// clear connection rows in menu, fuck DRY
-		for i in 0..<numShownRows {
-			self.statusMenu.removeItemAtIndex(0)
-		}
-
-		numShownRows = 0
-
-		// is there any status item to be done here? I think not... Let's see
-
-		if let pretime = cm.stopDict[cm.selectedStop] {
-			var i = 0
-			for connection in cm.connections {
-				// stop adding rows if enough are already displayed
-				if (i == self.numRowsToShow) {
-					break
-				}
-				let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
-				if connection.selected {
-					connectionMenuItem.state = NSOnState
-				}
-				statusMenu.insertItem(connectionMenuItem, atIndex: i)
-				numShownRows++
-				i++
-			}
-		}
-	}
-
 	func update() {
-		// clear connection rows in menu
-		for i in 0..<numShownRows {
-			self.statusMenu.removeItemAtIndex(0)
-		}
+		// Update menu by kicking all connections that are no longer relevant
+		menuController.updateMenu()
 
-		// pull new data and update UI in callback
-		numShownRows = 0
-		cm.update({
-			if self.notificationBlockingStatusItem {
-				// A connection is selected, so that is displayed in the menubar
-				// updated twice on purpose to clear the necessary space
-				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)"
-				self.statusItem.title = "\(self.cm.selectedConnection.arrivalMinutes)"
-			} else {
-				var firstBusArrivalMinutes = 0
-				// no connection is selected, so the next connection is displayed in the menubar
-				if let pretime = self.cm.stopDict[self.cm.selectedStop] {
-					for connection in self.cm.connections {
-						if (connection.arrivalMinutes >= pretime) {
-							// get the first bus with an arrivaltime after the pretime
-							firstBusArrivalMinutes = connection.arrivalMinutes
-							break
-						}
-					}
-					// update the statusMenu.title
-					// updated twice on purpose to clear the necessary space
-					self.statusItem.title = "\(firstBusArrivalMinutes)"
-					self.statusItem.title = "\(firstBusArrivalMinutes)"
-				}
-			}
+		// pull new data from API
 
-			// loop through connections to update NSMenuItems
-			if let pretime = self.cm.stopDict[self.cm.selectedStop] {
-				var i = 0
-				for connection in self.cm.connections {
-					if (connection.arrivalMinutes >= pretime) {
-						// stop adding rows if enough are already displayed
-						if (i == self.numRowsToShow) {
-							break
-						}
-						let connectionMenuItem = ConnectionMenuItem(connection: connection, title: connection.toString(), action: Selector("connectionSelected:"), keyEquivalent: "")
-						if connection.selected {
-							connectionMenuItem.state = NSOnState
-						}
-						self.statusMenu.insertItem(connectionMenuItem, atIndex: i)
-						self.numShownRows++
-						i++
-					}
-				}
-			}
-		})
+		// update UI
+			// check to see if the statusicon should be set to a custom connection if one is selected
+			// create new connectionmenuitems for all connections and add these to the menu
+			// if a notified connection has passed, set the firstmost connection to the statusitem
 
-		// show new busses in the menubar after a notified connection is through
-		let currentTime = NSDate()
-		if (currentTime.laterDate(notificationTime.dateByAddingTimeInterval(NSTimeInterval(15 * 60))) == currentTime) {
-			notificationBlockingStatusItem = false
-		}
-	}
 
-	// NSMenu
-
-	func connectionSelected(sender: ConnectionMenuItem) {
-//		NSLog("Set a notification for \(sender.connection.toString())")
-		notificationTime = NSDate(timeInterval: NSTimeInterval(-(cm.notificationDict[cm.selectedStop]!) * 60), sinceDate: sender.connection.arrivalDate)
-
-		// clear a possible previous notification
-		NSUserNotificationCenter.defaultUserNotificationCenter().removeScheduledNotification(notification)
-
-		let currentDate = NSDate()
-		if (showNotifications && notificationTime.laterDate(currentDate) == notificationTime) {
-			// send a notification right now to tell the user when he's being notified again
-			let tmpnotification = NSUserNotification()
-			tmpnotification.title = "Ist notiert!"
-			// NSDate.dateWithCalendarFormat is actually deprecated as of OS X 10.10
-			// TODO: use .descriptionWithLocale instead
-			let dateformat = "%H:%M"
-			let timezone = NSTimeZone(abbreviation: "CEST")
-			tmpnotification.informativeText = "Du bekommst um \(notificationTime.dateWithCalendarFormat(dateformat, timeZone: timezone)) Uhr eine Benachrichtigung. \(cm.notificationDict[cm.selectedStop]!) Minuten vor Abfahrt."
-			NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(tmpnotification)
-
-			// register notification to be sent at time of notification
-			notification = NSUserNotification()
-			if (sender.connection.line.toInt() > 20) {
-				// it's a bus!
-				notification.title = "Dein Bus kommt!"
-				// TODO: Replace \(15) with the notification time set for a single stop. This obviously isn't happening yet^^
-				notification.informativeText = "Deine Buslinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in \(cm.notificationDict[cm.selectedStop]!) Minuten an der Haltestelle \(cm.selectedStop)."
-			} else {
-				// it's a tram!
-				notification.title = "Deine Bahn kommt!"
-				notification.informativeText = "Deine Bahnlinie \(sender.connection.line) Richtung \(sender.connection.direction) hält in \(cm.notificationDict[cm.selectedStop]!) Minuten an der Haltestelle \(cm.selectedStop)."
-			}
-			notification.deliveryDate = notificationTime
-			NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
-		}
-
-		notificationBlockingStatusItem = true
-
-		cm.selectConnection(sender.connection)
-		sender.connection.selected = true
-
-		// update UI for the new statusitem.title
-		update()
 	}
 }
-
