@@ -102,7 +102,7 @@ class ConnectionManager {
 	/**
 	Make a call to DVBAPI to update list of connections
 
-	:param: completion handler when new data has been stored in connection list, will not be called on error
+	- parameter completion: handler when new data has been stored in connection list, will not be called on error
 	*/
 	internal func updateConnections(completion: (err: NSError?) -> Void) {
 		if let selectedStopName = selectedStop {

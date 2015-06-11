@@ -19,7 +19,7 @@ class MenuController: NSMenu {
 
 	var numRowsToShow = 5
 
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 
 		fatalError("Initialized NSMenu through init(coder:). Wat?")

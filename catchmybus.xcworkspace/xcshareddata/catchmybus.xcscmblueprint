@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B1609CE227DE13CB2F33E19BC2D3C67C8A272665",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B1609CE227DE13CB2F33E19BC2D3C67C8A272665" : 0,
+    "7BCDC6582A5AB53449720B4AEE2FF9BB911EE594" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D68F2BEC-F63A-4A01-B600-4C75C1AE684A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B1609CE227DE13CB2F33E19BC2D3C67C8A272665" : "catchmybus",
+    "7BCDC6582A5AB53449720B4AEE2FF9BB911EE594" : "catchmybuscatchmybus\/PFAboutWindow"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "catchmybus",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "catchmybus.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:perfaram\/PFAboutWindow.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7BCDC6582A5AB53449720B4AEE2FF9BB911EE594"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:kiliankoe\/catchmybus.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1609CE227DE13CB2F33E19BC2D3C67C8A272665"
+    }
+  ]
+}

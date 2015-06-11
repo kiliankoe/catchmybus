@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
 		// setup statusItem
 		let icon = NSImage(named: "statusIcon")
-		icon?.setTemplate(true)
+		icon?.setTemplate = true
 		statusItem.image = icon
 		statusItem.menu = MenuController()
 
