@@ -83,7 +83,7 @@ class MenuController: NSMenu {
 	// MARK: -
 
 	func updateMenu() {
-
+		// TODO: Remove all rows that are now outdated and add in correct number of new ones
 	}
 
 	func updateNumRowsToShowValue() {
@@ -94,7 +94,10 @@ class MenuController: NSMenu {
 	// MARK: - Selections
 
 	func selectConnection(sender: ConnectionMenuItem) {
-
+		// clear a possible previous notification
+		// show a notification about the upcoming notification
+		// schedule notification for time when bus comes - 15 minutes
+		// set statusitem for the selected connection
 	}
 
 	func selectStop(sender: NSMenuItem) {
