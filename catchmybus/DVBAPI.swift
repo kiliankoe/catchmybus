@@ -30,7 +30,7 @@ class DVBAPI {
 			"outputFormat": "JSON"
 		]
 
-		Alamofire.request(.GET, url, parameters: params).responseJSON { (_, res, jsonData, err) in
+		Alamofire.request(.GET, URLString: url, parameters: params).responseJSON { (_, res, jsonData, err) in
 			if err == nil && res?.statusCode == 200 {
 				completion(data: JSON(jsonData!), err: nil)
 			} else {

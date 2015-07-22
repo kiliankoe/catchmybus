@@ -31,12 +31,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 		// initialize default NSUserDefaults
 		let defaultStopDict = ["Helmholtzstraße": 1, "Zellescher Weg": 5, "Heinrich-Zille-Straße": 8, "Technische Universität": 1]
 		let defaultNotificationDict = ["Helmholtzstraße": 5, "Zellescher Weg": 15, "Heinrich-Zille-Straße": 15, "Technische Universität": 3]
-		var defaults: Dictionary<NSObject, AnyObject> = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße"]
+		let defaults: [String: AnyObject] = [kNumRowsToShowKey : 5, kStopDictKey : defaultStopDict, kNotificationDictKey: defaultNotificationDict, kSelectedStopKey: "Helmholtzstraße"]
 		NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
 
 		// setup statusItem
 		let icon = NSImage(named: "statusIcon")
-		icon?.setTemplate = true
+		icon?.template = true
 		statusItem.image = icon
 		statusItem.menu = MenuController()
 

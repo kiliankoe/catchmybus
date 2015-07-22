@@ -107,7 +107,7 @@ class ConnectionManager {
 	internal func updateConnections(completion: (err: NSError?) -> Void) {
 		if let selectedStopName = selectedStop {
 			DVBAPI.DMRequest(selectedStopName, completion: { (data, err) -> () in
-				println(data)
+				print(data)
 				completion(err: nil)
 			})
 		} else {
