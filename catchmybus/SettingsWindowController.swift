@@ -32,17 +32,9 @@ class SettingsWindowController: NSWindowController {
 		numRowsToShowSlider.integerValue = numRowsToShow
 
 		let shouldDisplayNotifications = NSUserDefaults.standardUserDefaults().boolForKey(kShouldDisplayNotifications)
-		if shouldDisplayNotifications {
-			displayNotificationsCheckbox.state = NSOnState
-		} else {
-			displayNotificationsCheckbox.state = NSOffState
-		}
+		displayNotificationsCheckbox.state = shouldDisplayNotifications ? NSOnState : NSOffState
 
-		if NSBundle.mainBundle().isLoginItem() {
-			startAppAtLoginCheckbox.state = NSOnState
-		} else {
-			startAppAtLoginCheckbox.state = NSOffState
-		}
+		startAppAtLoginCheckbox.state = NSBundle.mainBundle().isLoginItem() ? NSOnState : NSOffState
 
 		// TODO: Use NSLocalizedStrings to update labels for all UI elements
 
